@@ -1,23 +1,41 @@
 import socket
 import fonction
 # Adresse serveur
-IP_Server = '172.31.190.240'
-Port_Server = 12345
-Menu = ["Help", "Settings", "Exit"]
 
+Menu = ["Connection", "Help", "Settings", "Exit"]
 
-# Creation Socket de connection
-addr = (IP_Server, Port_Server)
-socket_ = socket.create_connection(addr)
-print(f"Connection Reussi a {IP_Server}:{Port_Server}")
+# lancement Menu par defaut
+fonction.menu(Menu)
 
 # affectation input_
 input_ = fonction.input_key()
 
+if (input_.lower() == 'connection'):
+    fonction.connection()
+    IP_Server = input('Ip du serveur : ')
+    Port_Server = input('Port du serveur : ')
+    # Creation Socket de connection
+    addr = (f'{IP_Server}', Port_Server.replace("'", ""))
+    socket_ = socket.create_connection(addr)
+    print(f"Connection Reussi a {IP_Server}:{Port_Server}\n")
+
+input_ = ""
 while True:
     try:
         if (input_.lower() == 'menu'):
             fonction.menu(Menu)
+
+        if (input_.lower() == 'connection'):
+            fonction.connection()
+            IP_Server = input('Ip du serveur : ')
+            Port_Server = input('Port du serveur : ')
+            # Creation Socket de connection
+            addr = (f'{IP_Server}', Port_Server.replace("'", ""))
+            socket_ = socket.create_connection(addr)
+            print(f"Connection Reussi a {IP_Server}:{Port_Server}\n")
+
+        if (input_.lower() == 'settings'):
+            fonction.settings()
 
         if (input_.lower() == 'settings'):
             fonction.settings()
