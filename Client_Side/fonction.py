@@ -3,25 +3,28 @@ import hashlib
 
 
 def input_key():
-    return input("Command : ")
+    return input("Commande : ")
 
 
 def menu(menu_tab):
     print("""
 
- /$$      /$$                              
-| $$$    /$$$                              
-| $$$$  /$$$$  /$$$$$$  /$$$$$$$  /$$   /$$
-| $$ $$/$$ $$ /$$__  $$| $$__  $$| $$  | $$
-| $$  $$$| $$| $$$$$$$$| $$  \ $$| $$  | $$
-| $$\  $ | $$| $$_____/| $$  | $$| $$  | $$
-| $$ \/  | $$|  $$$$$$$| $$  | $$|  $$$$$$/
-|__/     |__/ \_______/|__/  |__/ \______/ 
-                                           
-                                           
+ /$$   /$$ /$$                                                           /$$    
+| $$$ | $$| $$                                                          | $$    
+| $$$$| $$| $$   /$$  /$$$$$$$  /$$$$$$  /$$$$$$$  /$$$$$$$   /$$$$$$$ /$$$$$$  
+| $$ $$ $$| $$  /$$/ /$$_____/ /$$__  $$| $$__  $$| $$__  $$ /$$_____/|_  $$_/  
+| $$  $$$$| $$$$$$/ | $$      | $$  \ $$| $$  \ $$| $$  \ $$| $$        | $$    
+| $$\  $$$| $$_  $$ | $$      | $$  | $$| $$  | $$| $$  | $$| $$        | $$ /$$
+| $$ \  $$| $$ \  $$|  $$$$$$$|  $$$$$$/| $$  | $$| $$  | $$|  $$$$$$$  |  $$$$/
+|__/  \__/|__/  \__/ \_______/ \______/ |__/  |__/|__/  |__/ \_______/   \___/  
+                                                                                
+                                                                                
+                                                                                              
           """)
     for index, element in enumerate(menu_tab):
         print(f"{index + 1}) {element}")
+
+    print("")
 
 
 def connection():
@@ -76,3 +79,13 @@ def settings():
                 
                 
         """)
+
+
+def setconnect():
+    ip_server = input('Ip du serveur : ')
+    port_server = input('Port du serveur : ')
+    # Creation Socket de connection
+    addr = (f'{ip_server}', port_server.replace("'", ""))
+    socket_ = socket.create_connection(addr)
+    result = f"Connection Reussi a {ip_server}:{port_server}\n"
+    return result

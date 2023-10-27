@@ -7,17 +7,14 @@ Menu = ["Connection", "Help", "Settings", "Exit"]
 # lancement Menu par defaut
 fonction.menu(Menu)
 
-# affectation input_
+# recuperation des entrées
 input_ = fonction.input_key()
+
 
 if (input_.lower() == 'connection'):
     fonction.connection()
-    IP_Server = input('Ip du serveur : ')
-    Port_Server = input('Port du serveur : ')
-    # Creation Socket de connection
-    addr = (f'{IP_Server}', Port_Server.replace("'", ""))
-    socket_ = socket.create_connection(addr)
-    print(f"Connection Reussi a {IP_Server}:{Port_Server}\n")
+    socket_ = fonction.setconnect()
+
 
 input_ = ""
 while True:
@@ -27,12 +24,7 @@ while True:
 
         if (input_.lower() == 'connection'):
             fonction.connection()
-            IP_Server = input('Ip du serveur : ')
-            Port_Server = input('Port du serveur : ')
-            # Creation Socket de connection
-            addr = (f'{IP_Server}', Port_Server.replace("'", ""))
-            socket_ = socket.create_connection(addr)
-            print(f"Connection Reussi a {IP_Server}:{Port_Server}\n")
+            socket_ = fonction.setconnect()
 
         if (input_.lower() == 'settings'):
             fonction.settings()
