@@ -32,10 +32,9 @@ while True:
         if (input_.lower() == 'menu'):
             Menu.menu(Menu, ip_server, port_server)
 
-        if (input_.lower() == 'connection'):
-            Menu.connection(Menu_Connect)
-            fonction.type_verif(input_)
-            socket_ = fonction.setconnect(input_)
+        if (input_ == '1'):
+            Menu.chat()
+            fonction.send_msg(socket_)
 
         if (input_.lower() == 'settings'):
             Menu.settings()

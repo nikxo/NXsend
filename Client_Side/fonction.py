@@ -2,15 +2,19 @@ import socket
 import hashlib
 
 
-# def input_key(select):
-#     if (select.lower() == 'commande'):
-#         return input("Commande : ")
-#     elif (select.lower() == 'chat'):
-#         return input("Chat : ")
+def input_key(type_key='commande'):
+    if (type_key.lower() == 'config'):
+        return input("Config : ")
+    if (type_key.lower() == 'chat'):
+        return input("Chat : ")
+    if (type_key.lower() == 'file Send'):
+        return input("File Send : ")
+    if (type_key.lower() == 'commande'):
+        return input("Commande : ")
 
 
-def input_key():
-    return input("Commande : ")
+# def input_key():
+#     return input("Commande : ")
 
 
 def setconnect(type):
@@ -29,14 +33,19 @@ def setconnect(type):
 
 
 def statconnect(ip_server, port_server):
+    print("Connecté à :")
     print(f"Ip du serveur : {ip_server}")
     print(f"Port du serveur : {port_server}\n")
 
 
-def type_verif(input_):
+def type_verif(input_, type_key='commande'):
     if input_.lower() not in ['server relay', 'autonomous relay', '1', '2']:
         print("Invalide entry")
-        input_ = input_key()
+        input_ = input_key(type_key)
         type_verif(input_)
     else:
         return input_
+
+
+def send_msg(socket_):
+    socket_.sendall("test")
