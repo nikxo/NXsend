@@ -1,39 +1,47 @@
 import socket
 import fonction
-# Adresse serveur
+import Menu
+import sys
 
-Menu = ["Connection", "Help", "Settings", "Exit"]
+# List Menu
+Menu_ = ["Chat", "File Send", "Help", "Settings", "Exit"]
+Menu_Connect = ["Server Relay", "Autonomous Relay"]
 
-# lancement Menu par defaut
-fonction.menu(Menu)
+# Defaut connection page
+Menu.connection(Menu_Connect)
 
 # recuperation des entrées
 input_ = fonction.input_key()
 
+# Verifie l'entrée utilisateur et ce connecte au server
+try:
+    fonction.type_verif(input_)
+    ip_server, port_server, socket_ = fonction.setconnect(input_)
+except Exception as e:
+    print(f"\n{str(e)}")
+    sys.exit()
 
-if (input_.lower() == 'connection'):
-    fonction.connection()
-    socket_ = fonction.setconnect()
+
+# lancement Menu par defaut
+Menu.menu(Menu_, ip_server, port_server)
 
 
 input_ = ""
 while True:
     try:
         if (input_.lower() == 'menu'):
-            fonction.menu(Menu)
+            Menu.menu(Menu, ip_server, port_server)
 
         if (input_.lower() == 'connection'):
-            fonction.connection()
-            socket_ = fonction.setconnect()
+            Menu.connection(Menu_Connect)
+            fonction.type_verif(input_)
+            socket_ = fonction.setconnect(input_)
 
         if (input_.lower() == 'settings'):
-            fonction.settings()
-
-        if (input_.lower() == 'settings'):
-            fonction.settings()
+            Menu.settings()
 
         if (input_.lower() == 'help'):
-            fonction.help()
+            Menu.help()
 
         if (input_.lower() == 'exit'):
             socket_.close()
@@ -43,3 +51,4 @@ while True:
 
     except Exception as e:
         print(str(e))
+        sys.exit()

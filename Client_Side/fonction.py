@@ -2,90 +2,41 @@ import socket
 import hashlib
 
 
+# def input_key(select):
+#     if (select.lower() == 'commande'):
+#         return input("Commande : ")
+#     elif (select.lower() == 'chat'):
+#         return input("Chat : ")
+
+
 def input_key():
     return input("Commande : ")
 
 
-def menu(menu_tab):
-    print("""
-
- /$$   /$$ /$$                                                           /$$    
-| $$$ | $$| $$                                                          | $$    
-| $$$$| $$| $$   /$$  /$$$$$$$  /$$$$$$  /$$$$$$$  /$$$$$$$   /$$$$$$$ /$$$$$$  
-| $$ $$ $$| $$  /$$/ /$$_____/ /$$__  $$| $$__  $$| $$__  $$ /$$_____/|_  $$_/  
-| $$  $$$$| $$$$$$/ | $$      | $$  \ $$| $$  \ $$| $$  \ $$| $$        | $$    
-| $$\  $$$| $$_  $$ | $$      | $$  | $$| $$  | $$| $$  | $$| $$        | $$ /$$
-| $$ \  $$| $$ \  $$|  $$$$$$$|  $$$$$$/| $$  | $$| $$  | $$|  $$$$$$$  |  $$$$/
-|__/  \__/|__/  \__/ \_______/ \______/ |__/  |__/|__/  |__/ \_______/   \___/  
-                                                                                
-                                                                                
-                                                                                              
-          """)
-    for index, element in enumerate(menu_tab):
-        print(f"{index + 1}) {element}")
-
-    print("")
+def setconnect(type):
+    if (type.lower() == 'server relay' or type.lower() == '1'):
+        ip_server = input('Ip du serveur : ')
+        port_server = input('Port du serveur : ')
+        # Creation Socket de connection
+        addr = (f'{ip_server}', port_server.replace("'", ""))
+        socket_ = socket.create_connection(addr)
+        print(f"Connection Reussi a {ip_server}:{port_server}\n")
+        return ip_server, port_server, socket_
+    elif (type.lower() == 'autonomous relay' or type.lower() == '2'):
+        print("\nUnder devlopement")
+        print("Switch to Server Relay\n")
+        return setconnect('1')
 
 
-def connection():
-    print("""
-  /$$$$$$                                                      /$$     /$$                    
- /$$__  $$                                                    | $$    |__/                    
-| $$  \__/  /$$$$$$  /$$$$$$$  /$$$$$$$   /$$$$$$   /$$$$$$$ /$$$$$$   /$$  /$$$$$$  /$$$$$$$ 
-| $$       /$$__  $$| $$__  $$| $$__  $$ /$$__  $$ /$$_____/|_  $$_/  | $$ /$$__  $$| $$__  $$
-| $$      | $$  \ $$| $$  \ $$| $$  \ $$| $$$$$$$$| $$        | $$    | $$| $$  \ $$| $$  \ $$
-| $$    $$| $$  | $$| $$  | $$| $$  | $$| $$_____/| $$        | $$ /$$| $$| $$  | $$| $$  | $$
-|  $$$$$$/|  $$$$$$/| $$  | $$| $$  | $$|  $$$$$$$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$
- \______/  \______/ |__/  |__/|__/  |__/ \_______/ \_______/   \___/  |__/ \______/ |__/  |__/
-                                                                                              
-                                                                                              
-                                                                                              
-""")
+def statconnect(ip_server, port_server):
+    print(f"Ip du serveur : {ip_server}")
+    print(f"Port du serveur : {port_server}\n")
 
 
-def help():
-    print("""
-          
- /$$   /$$           /$$          
-| $$  | $$          | $$          
-| $$  | $$  /$$$$$$ | $$  /$$$$$$ 
-| $$$$$$$$ /$$__  $$| $$ /$$__  $$
-| $$__  $$| $$$$$$$$| $$| $$  \ $$
-| $$  | $$| $$_____/| $$| $$  | $$
-| $$  | $$|  $$$$$$$| $$| $$$$$$$/
-|__/  |__/ \_______/|__/| $$____/ 
-                        | $$      
-                        | $$      
-                        |__/     
-                        
-                         
-""")
-
-
-def settings():
-    print("""   
-
-                       /$$     /$$     /$$                              
-                      | $$    | $$    |__/                              
-  /$$$$$$$  /$$$$$$  /$$$$$$ /$$$$$$   /$$ /$$$$$$$   /$$$$$$   /$$$$$$$
- /$$_____/ /$$__  $$|_  $$_/|_  $$_/  | $$| $$__  $$ /$$__  $$ /$$_____/
-|  $$$$$$ | $$$$$$$$  | $$    | $$    | $$| $$  \ $$| $$  \ $$|  $$$$$$ 
- \____  $$| $$_____/  | $$ /$$| $$ /$$| $$| $$  | $$| $$  | $$ \____  $$
- /$$$$$$$/|  $$$$$$$  |  $$$$/|  $$$$/| $$| $$  | $$|  $$$$$$$ /$$$$$$$/
-|_______/  \_______/   \___/   \___/  |__/|__/  |__/ \____  $$|_______/ 
-                                                     /$$  \ $$          
-                                                    |  $$$$$$/          
-                                                     \______/           
-                
-                
-        """)
-
-
-def setconnect():
-    ip_server = input('Ip du serveur : ')
-    port_server = input('Port du serveur : ')
-    # Creation Socket de connection
-    addr = (f'{ip_server}', port_server.replace("'", ""))
-    socket_ = socket.create_connection(addr)
-    result = f"Connection Reussi a {ip_server}:{port_server}\n"
-    return result
+def type_verif(input_):
+    if input_.lower() not in ['server relay', 'autonomous relay', '1', '2']:
+        print("Invalide entry")
+        input_ = input_key()
+        type_verif(input_)
+    else:
+        return input_
