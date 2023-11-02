@@ -12,22 +12,23 @@ Server = socket.create_server((IP_Server, Port_Server))
 
 print(f"Serveur a l'ecoute sur {IP_Server}:{Port_Server}")
 
-Client_socket, Client_adresse = Server.accept()
-print(f"Connection entrante : {Client_adresse}")
+conn, addr = Server.accept()
+print(f"Connection entrante : {addr}")
+# data = conn.recv(4096)
+# print("Received data:", data.decode())
 
+Dest = conn.recv(4096)
+
+try:
+    Server.connect(Dest)
+
+except Exception as e:
+    print("error dest")
 
 while True:
     try:
-        conn, addr = Server.accept()
-
         data = conn.recv(4096)
-
-        while True:
-            if not data:
-                print("break")
-                break
-        print("Received data:", data.decode())
+        if data:
+            Server.sendto(data, Dest)
     except Exception as e:
         print(str(e))
-
-    print(data.decode())
