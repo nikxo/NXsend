@@ -1,21 +1,33 @@
 import socket
 
+
 # Adresse serveur
-IP_Server = '127.0.0.1'
+IP_Server = '172.31.190.240'
 Port_Server = 12345
 addr = (IP_Server, Port_Server)
 
+# buffer = str(1024)
+
 Server = socket.create_server((IP_Server, Port_Server))
 
+print(f"Serveur a l'ecoute sur {IP_Server}:{Port_Server}")
 
-def decodeBuffer(buffer_):
-    message = buffer_.decode('utf-8')
-    return message
+Client_socket, Client_adresse = Server.accept()
+print(f"Connection entrante : {Client_adresse}")
 
 
 while True:
-    Client_socket, Client_adresse = Server.accept()
-    print(f"Connection entrante : {Client_adresse}")
+    try:
+        conn, addr = Server.accept()
 
-    Server.recvmsg(buffer)
-    print(decodeBuffer(buffer))
+        data = conn.recv(4096)
+
+        while True:
+            if not data:
+                print("break")
+                break
+        print("Received data:", data.decode())
+    except Exception as e:
+        print(str(e))
+
+    print(data.decode())
