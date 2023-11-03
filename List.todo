@@ -1,0 +1,46 @@
+
+/$$$$$$$$ /$$$$$$        /$$$$$$$   /$$$$$$ 
+|__  $$__//$$__  $$      | $$__  $$ /$$__  $$
+   | $$  | $$  \ $$      | $$  \ $$| $$  \ $$
+   | $$  | $$  | $$      | $$  | $$| $$  | $$
+   | $$  | $$  | $$      | $$  | $$| $$  | $$
+   | $$  | $$  | $$      | $$  | $$| $$  | $$
+   | $$  |  $$$$$$/      | $$$$$$$/|  $$$$$$/
+   |__/   \______/       |_______/  \______/ 
+                                             
+----------------------------------------------------------------------------------------------------------------------------                                            
+                                             
+𝙖𝙛𝙛𝙞𝙘𝙝𝙖𝙜𝙚:
+☐ Refonte necessaire du systeme d'affichage de menu en groupant les menu dans une seul def |faire un switch be like| @high 
+☐ Permettre le deplacement dans les different menu/sub menu @high 
+    ☐ Mise en place d'un stack pour memoriser les derniers menus @critical   
+𝙁𝙤𝙣𝙘𝙩𝙞𝙤𝙣𝙣𝙖𝙡𝙞𝙩𝙚:
+
+    communication:
+    ☐ Faire communiquer 2 client ensemble via serveur @critical 
+        ✔ Mise en place du threading @done (03/11/2023 23:28:32)
+            ✔ Ajout serveur side @done (03/11/2023 23:28:30)
+            ✔ Ajout client side @done (03/11/2023 23:28:31)
+        ☐ Redirection du traffic @critical 
+            ☐ Fonction de redirection serveur side @critical 
+            ☐ Fonction de selection d'un destinataire client side @critical 
+    ☐ communication decentralisée @low 
+        ☐ faire communiquer 2 clients directement en ce passant du serveur @low 
+            ☐ Ajouter l'option "Direct Send" au démarrage @low 
+            ☐ Implementation du threading en mode direct @low  
+            
+    Cryptage:
+    ☐ Pouvoir crypter les flux de données @high 
+        ☐ Implementation AES @critical  
+        ☐ Fonction d'ajout de clef privées/publiques @low 
+            ☐ database local pour sauvgarder les clefs publiques des destinataires @low 
+            ☐ Fonction de generation de clef privées @critical  
+            ☐ Choix possible de l'utilisateur de crypter ou non @critical 
+
+    Historique:
+    ☐ technique a voir ! client side stocker en local ou serveur side |peut etre mieux serveur side pour le taux de mise a jour| @low 
+
+    Optimisation:
+    ☐ Ajouter des commentaires @low 
+    ☐ supprimer la recursivitée @critical 
+    ☐ renommage clair des Fonctions/params @high  
