@@ -13,10 +13,6 @@ def input_key(type_key='commande'):
         return input("Commande : ")
 
 
-# def input_key():
-#     return input("Commande : ")
-
-
 def setconnect(type):
     if (type.lower() == 'server relay' or type.lower() == '1'):
         ip_server = input('Ip du serveur : ')

@@ -1,13 +1,14 @@
 import socket
 
-ip = '172.31.190.240'
+ip = '192.168.0.51'
 
-Ip_Server = "192.168.0.51"
-Port_Server = 12345
-
-Socket = socket.create_connection((ip, 12345))
-Server = socket.create_server((Ip_Server, Port_Server))
+Client_Socket = socket.create_connection((ip, 4444))
 
 while True:
     message = input("Send : ")
-    Socket.send(message.encode())
+    Client_Socket.send(message.encode())
+    while True:
+        data = Client_Socket.recv(1024)
+        if data:
+            print(data.decode('utf-8'))
+            break
