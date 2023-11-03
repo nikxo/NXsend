@@ -3,9 +3,18 @@ import fonction
 import Menu
 import sys
 
-# List Menu
+# Listes Menu pour affichage
 Menu_ = ["Chat", "File Send", "Help", "Settings", "Exit"]
+Menu_Chat = ["Settings", "Retour", "Exit"]
 Menu_Connect = ["Server Relay", "Autonomous Relay"]
+
+# Listes Menu pour verification
+Menu_lower = ["chat", "file send", "help", "settings", "exit"]
+Menu_Chat_lower = ["settings", "retour", "exit"]
+Menu_Connect_lower = ["server relay", "autonomous relay"]
+
+# Dernier menu
+Menu_Hist = []
 
 # Defaut connection page
 Menu.connection(Menu_Connect)
@@ -15,8 +24,8 @@ input_ = fonction.input_key()
 
 # Verifie l'entrée utilisateur et ce connecte au server
 try:
-    fonction.type_verif(input_)
-    ip_server, port_server, socket_ = fonction.setconnect(input_)
+    input_verify = fonction.type_verif(input_)
+    ip_server, port_server, socket_ = fonction.setconnect(input_verify)
 except Exception as e:
     print(f"\n{str(e)}")
     sys.exit()
@@ -30,19 +39,29 @@ input_ = ""
 while True:
     try:
         if (input_.lower() == 'menu'):
-            Menu.menu(Menu, ip_server, port_server)
+            Menu.menu(Menu_, ip_server, port_server)
 
-        if (input_ == '1'):
-            Menu.chat()
-            fonction.send_msg(socket_)
+        elif (input_.lower() == 'chat'):
+            Menu_Hist.append('chat')
+            Menu.chat_ascii()
+            request = fonction.input_key('chat')
+            while True:
+                if (request.lower() in [item.lower() for item in Menu_Chat_lower]):
+                    if (request.lower() == 'retour'):
+                        result = Menu_Hist[-1]
+                        Menu.result()
 
-        if (input_.lower() == 'settings'):
+                else:
+                    print("invalide")
+                    request = fonction.input_key('chat')
+
+        elif (input_.lower() == 'settings'):
             Menu.settings()
 
-        if (input_.lower() == 'help'):
+        elif (input_.lower() == 'help'):
             Menu.help()
 
-        if (input_.lower() == 'exit'):
+        elif (input_.lower() == 'exit'):
             socket_.close()
             break
         else:

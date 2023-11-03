@@ -82,7 +82,7 @@ def settings():
         """)
 
 
-def chat():
+def chat_ascii():
     print("""
           
   /$$$$$$  /$$                   /$$    
@@ -97,3 +97,11 @@ def chat():
                                         
                                         
 """)
+
+
+def chat_sub(menu_tab, ip_server, port_server, input_='', ):
+    fonction.statconnect(ip_server, port_server)
+    for index, element in enumerate(menu_tab):
+        print(f"{index + 1}) {element}")
+
+    print("")

@@ -1,15 +1,16 @@
 import socket
 import hashlib
+import Menu
 
 
-def input_key(type_key='commande'):
-    if (type_key.lower() == 'config'):
+def input_key(type_key="commande"):
+    if (type_key.lower() == "config"):
         return input("Config : ")
-    if (type_key.lower() == 'chat'):
+    elif (type_key.lower() == "chat"):
         return input("Chat : ")
-    if (type_key.lower() == 'file Send'):
+    elif (type_key.lower() == "file Send"):
         return input("File Send : ")
-    if (type_key.lower() == 'commande'):
+    elif (type_key.lower() == "commande"):
         return input("Commande : ")
 
 
@@ -38,10 +39,18 @@ def type_verif(input_, type_key='commande'):
     if input_.lower() not in ['server relay', 'autonomous relay', '1', '2']:
         print("Invalide entry")
         input_ = input_key(type_key)
-        type_verif(input_)
+        input_verify = type_verif(input_)
+        return input_verify
     else:
         return input_
 
 
-def send_msg(socket_):
-    socket_.sendall("test")
+def send_msg(client_socket):
+    while True:
+        message = input("Chat : ")
+        client_socket.send(message.encode())
+        while True:
+            data = client_socket.recv(1024)
+            if data:
+                print(f"\n{data.decode('utf-8')}\n")
+                break
