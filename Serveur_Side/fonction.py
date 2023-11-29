@@ -14,4 +14,5 @@ def thread_chat(conn, addr):
         # Répondre au client
         conn.send(message.encode())
 
-    addr.close()
+    conn.close()
+    print(f"Handler for {addr} finish")

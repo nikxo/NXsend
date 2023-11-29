@@ -46,11 +46,20 @@ def type_verif(input_, type_key='commande'):
 
 
 def send_msg(client_socket):
+    message = input("Chat : ")
+    client_socket.send(message.encode())
+
+
+def thread_chat_recv(conn):
     while True:
-        message = input("Chat : ")
-        client_socket.send(message.encode())
-        while True:
-            data = client_socket.recv(1024)
-            if data:
-                print(f"\n{data.decode('utf-8')}\n")
-                break
+        data = conn.recv(1024)
+        if not data:
+            break
+        # Faites quelque chose avec les données reçues
+        print(f"Données reçues: {data.decode('utf-8')}")
+        # message
+        message = "Message reçu"
+        # Répondre au client
+        conn.send(message.encode())
+
+    conn.close()

@@ -42,18 +42,9 @@ while True:
             Menu.menu(Menu_, ip_server, port_server)
 
         elif (input_.lower() == 'chat'):
-            Menu_Hist.append('chat')
             Menu.chat_ascii()
-            request = fonction.input_key('chat')
-            while True:
-                if (request.lower() in [item.lower() for item in Menu_Chat_lower]):
-                    if (request.lower() == 'retour'):
-                        result = Menu_Hist[-1]
-                        Menu.result()
-
-                else:
-                    print("invalide")
-                    request = fonction.input_key('chat')
+            while (input_.lower() != 'return' or 'exit'):
+                fonction.send_msg(socket_)
 
         elif (input_.lower() == 'settings'):
             Menu.settings()
