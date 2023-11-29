@@ -76,17 +76,20 @@ class typing_elem(customtkinter.CTkFrame):
 
 # customtkinter.CTkFrame()
 
+
 class typing_elem_sub(customtkinter.CTkFrame):
     def __init__(self, master):
         super().__init__(master)
         self.configure(fg_color="#CB8584", height=45)
         self.grid_columnconfigure(0, weight=1)
-        self.grid_columnconfigure(1, weight=10)
+        self.grid_columnconfigure(1, weight=100)
         self.grid_columnconfigure(2, weight=1)
         self.grid(padx=20, pady=20, sticky="ew")
 
         typing_elem_entry_class = typing_elem_entry(self)
         typing_elem_entry_class.grid(column=1)
+        typing_elem_button_class = typing_elem_button(self)
+        typing_elem_button_class.grid(column=0, row=0)
 
 
 class typing_elem_entry(customtkinter.CTkEntry):
@@ -94,7 +97,14 @@ class typing_elem_entry(customtkinter.CTkEntry):
         super().__init__(master)
         # Entry bar
         self.configure(border_color="#E4EEFF", border_width=0)
-        self.grid(sticky="wnse", padx=40, pady=10)
+        self.grid(sticky="wnse", padx=10, pady=10)
+
+
+class typing_elem_button(customtkinter.CTkButton):
+    def __init__(self, master):
+        super().__init__(master)
+        self.configure(fg_color="#fcba03", width=2, height=2)
+        self.grid(sticky="ns")
 
 
 if __name__ == "__main__":
