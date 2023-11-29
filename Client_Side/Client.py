@@ -45,6 +45,7 @@ while True:
             Menu.chat_ascii()
             while (input_.lower() != 'return' or 'exit'):
                 fonction.send_msg(socket_)
+                if():
 
         elif (input_.lower() == 'settings'):
             Menu.settings()
