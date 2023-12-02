@@ -2,6 +2,8 @@ import socket
 import fonction
 import Menu
 import sys
+import threading
+import queue
 
 # Listes Menu pour affichage
 Menu_ = ["Chat", "File Send", "Help", "Settings", "Exit"]
@@ -24,9 +26,12 @@ input_ = fonction.input_key()
 
 # Verifie l'entrée utilisateur et ce connecte au server
 try:
+
     input_verify = fonction.type_verif(input_)
     ip_server, port_server, socket_ = fonction.setconnect(input_verify)
+
 except Exception as e:
+
     print(f"\n{str(e)}")
     sys.exit()
 
@@ -42,10 +47,17 @@ while True:
             Menu.menu(Menu_, ip_server, port_server)
 
         elif (input_.lower() == 'chat'):
+
+            Handler = threading.Thread(
+                target=fonction.thread_chat_recv, args=(socket_,))
+            Handler.start()
+
             Menu.chat_ascii()
+
             while (input_.lower() != 'return' or 'exit'):
                 fonction.send_msg(socket_)
-                if():
+
+            # Handler.stop()
 
         elif (input_.lower() == 'settings'):
             Menu.settings()
@@ -60,5 +72,6 @@ while True:
             input_ = fonction.input_key()
 
     except Exception as e:
+        # Handler.stop()
         print(str(e))
         sys.exit()

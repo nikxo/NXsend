@@ -16,13 +16,16 @@ def input_key(type_key="commande"):
 
 def setconnect(type):
     if (type.lower() == 'server relay' or type.lower() == '1'):
+
         ip_server = input('Ip du serveur : ')
         port_server = input('Port du serveur : ')
+
         # Creation Socket de connection
         addr = (f'{ip_server}', port_server.replace("'", ""))
         socket_ = socket.create_connection(addr)
         print(f"Connection Reussi a {ip_server}:{port_server}\n")
         return ip_server, port_server, socket_
+
     elif (type.lower() == 'autonomous relay' or type.lower() == '2'):
         print("\nUnder devlopement")
         print("Switch to Server Relay\n")
@@ -53,13 +56,5 @@ def send_msg(client_socket):
 def thread_chat_recv(conn):
     while True:
         data = conn.recv(1024)
-        if not data:
-            break
-        # Faites quelque chose avec les données reçues
-        print(f"Données reçues: {data.decode('utf-8')}")
-        # message
-        message = "Message reçu"
-        # Répondre au client
-        conn.send(message.encode())
-
-    conn.close()
+        if data:
+            print(f"{data.decode('utf-8')}\n")
