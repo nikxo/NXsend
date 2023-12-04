@@ -1,7 +1,7 @@
 import socket
 import threading
 import fonction as f
-
+import sql
 
 # Adresse serveur
 IP_Server = '147.215.205.114'
@@ -22,11 +22,12 @@ print(f"Serveur a l'ecoute sur {IP_Server}:{Port_Server}")
 
 while True:
     conn, addr = Server.accept()
-    if f.addr_is_online(addr):
-        break
     print(f"Connection entrante : {addr}")
-    f.socket_storage(addr, conn)
-    f.addr_storage(addr)
+
+    if sql.addr_is_in_db(addr[0]) == False:
+        sql.socket_storage(addr)
+        print(f"{addr}ajouté a la database")
+
     Handler = threading.Thread(
-        target=f.thread_chat, args=(conn, addr_Server))
+        target=f.thread_chat, args=(conn, addr))
     Handler.start()

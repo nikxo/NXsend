@@ -108,7 +108,7 @@ conn = f.setconnect()
 Handler_recv = threading.Thread(
     target=f.thread_chat_recv, args=(conn,))
 Handler_recv.start()
-f.peer_conn(conn)
+# f.peer_conn(conn)
 
 
 def show_msg_client(event=None):
@@ -116,6 +116,7 @@ def show_msg_client(event=None):
     message = entry_1.get()
     if message:
         conn.send(message.encode())
+        print("send")
         text_messages.config(state='normal')
         # Insère le nom avec le tag 'red'
         text_messages.insert(END, nom, 'red')

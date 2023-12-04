@@ -16,7 +16,7 @@ curseur.execute("DROP TABLE IF EXISTS addr")
 curseur.execute('''CREATE TABLE addr (
                   id INTEGER PRIMARY KEY,
                   adresse TEXT UNIQUE,
-                  socket INTEGER,
+                  port TEXT,
                   status TEXT,
                   UNIQUE(id)
                   )''')
