@@ -1,9 +1,10 @@
 import socket
 import threading
-import fonction
+import fonction as f
+
 
 # Adresse serveur
-IP_Server = '192.168.0.51'
+IP_Server = '147.215.205.114'
 Port_Server = 4444
 addr_Server = (IP_Server, Port_Server)
 
@@ -21,7 +22,11 @@ print(f"Serveur a l'ecoute sur {IP_Server}:{Port_Server}")
 
 while True:
     conn, addr = Server.accept()
+    if f.addr_is_online(addr):
+        break
     print(f"Connection entrante : {addr}")
+    f.socket_storage(addr, conn)
+    f.addr_storage(addr)
     Handler = threading.Thread(
-        target=fonction.thread_chat, args=(conn, addr_Server, addr_Dest))
+        target=f.thread_chat, args=(conn, addr_Server))
     Handler.start()

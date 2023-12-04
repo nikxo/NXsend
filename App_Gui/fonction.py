@@ -3,13 +3,22 @@ import hashlib
 from queue import Queue
 
 
+# Etablit la connection au serveur
 def setconnect():
     # Creation Socket de connection
-    addr = ('192.168.0.51', 4444)
+    addr = ('147.215.205.114', 4444)
     socket_ = socket.create_connection(addr)
     return socket_
 
 
+# Definit un pair distant
+def peer_conn(conn):
+    conn.send(b"IDDEST"
+              #   + dest.encode()
+              )
+
+
+# Envoi les messages au serveur
 def send_msg(client_socket):
     message = input("Chat : ")
     client_socket.send(message.encode())
@@ -19,6 +28,7 @@ def send_msg(client_socket):
 received_data_queue = Queue()
 
 
+# reçois les messages (Thread)
 def thread_chat_recv(conn):
     while True:
         data = conn.recv(1024)

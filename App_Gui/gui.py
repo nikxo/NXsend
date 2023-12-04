@@ -108,6 +108,7 @@ conn = f.setconnect()
 Handler_recv = threading.Thread(
     target=f.thread_chat_recv, args=(conn,))
 Handler_recv.start()
+f.peer_conn(conn)
 
 
 def show_msg_client(event=None):
