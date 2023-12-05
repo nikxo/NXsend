@@ -14,6 +14,22 @@ def thread_chat(conn, addr):
     # Créer un curseur
     curseur = connexion.cursor()
 
+    def addr_is_in_db(addr):
+        curseur.execute("SELECT adresse FROM addr WHERE adresse = ?", (addr,))
+        result = curseur.fetchall()
+        if result:
+            return True
+        return False
+
+    def addr_is_online(addr):
+        if addr_is_in_db(addr):
+            curseur.execute(
+                "SELECT status FROM addr WHERE adresse LIKE ? AND status = ?", (addr, "online"))
+            resultats = curseur.fetchall()  # Récupérer les résultats de la requête
+            if resultats:
+                return True
+            return False
+
     def get_socket(ip):
         curseur.execute("SELECT port FROM addr WHERE adresse = ?", (ip,))
         port = curseur.fetchone()
@@ -23,21 +39,25 @@ def thread_chat(conn, addr):
         return "nope"
 
     def peer_conn(conn, data):
-        while True:
-            data = conn.recv(1024)
-            data_dc_id = data[0:6].decode('utf-8')
-            data_dc = data[6:].decode('utf-8')
-            if data_dc_id == 'IDDEST':
-                addr = get_socket(data_dc)
-                if addr:
-                    return setconnect(addr)
+        data_dc = data[6:].decode('utf-8')
+        if data_dc_id == 'IDDEST':
+            addr = get_socket(data_dc)
+            if addr_is_online(addr[0]):
+                return get_socket_storage(addr[0])
+            print("offline")
 
     print(f"Handler start for {addr}")
+    dest = None
     while True:
         data = conn.recv(1024)
         if not data:
             break
-        dest = peer_conn(conn, data)
+        data_dc_id = data[0:6].decode('utf-8')
+        if data_dc_id == 'IDDEST':
+            dest = peer_conn(conn, data)
+        if not dest:
+            print("no socket found")
+            break
         print(f"Données reçues: {data.decode('utf-8')}")
         dest.send(data)
     conn.close()
@@ -46,8 +66,19 @@ def thread_chat(conn, addr):
 
 # Requete de connection au destinataire
 
+socket_storage_dic = {}
+
+
+def socket_storage(addr, conn):
+    socket_storage_dic[addr] = conn
+
+
+def get_socket_storage(addr):
+    return socket_storage_dic[addr]
 
 # etablit la connection avec l'adresse specifiée
+
+
 def setconnect(addr):
     # Creation Socket de connection
     socket_ = socket.create_connection(addr)

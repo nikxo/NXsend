@@ -18,8 +18,11 @@ addr_Dest = (IP_Server, Port_Server)
 Server = socket.create_server((IP_Server, Port_Server))
 print(f"Serveur a l'ecoute sur {IP_Server}:{Port_Server}")
 
+
 while True:
     conn, addr = Server.accept()
+    print(addr)
+    f.socket_storage(addr[0], conn)
     print(f"Connection entrante : {addr}")
 
     if Sql.addr_is_in_db(addr[0]) == False:
