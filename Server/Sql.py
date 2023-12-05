@@ -42,3 +42,6 @@ def get_socket(ip):
     curseur.execute(
         "SELECT adresse, port FROM addr WHERE adresse = ?", (ip,))
     return curseur.fetchall()
+
+
+show_database()

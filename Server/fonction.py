@@ -2,7 +2,7 @@ import threading
 import time
 from queue import Queue
 import socket
-import sql
+import Sql
 import sqlite3
 
 
@@ -15,19 +15,22 @@ def thread_chat(conn, addr):
     curseur = connexion.cursor()
 
     def get_socket(ip):
-        curseur.execute(
-            "SELECT adresse, port FROM addr WHERE adresse = ?", (ip,))
-        return curseur.fetchall()
+        curseur.execute("SELECT port FROM addr WHERE adresse = ?", (ip,))
+        port = curseur.fetchone()
+        if port:
+            port_value = port[0]  # Extraction de la valeur de port du tuple
+            return str(ip), int(port_value)
+        return "nope"
 
     def peer_conn(conn, data):
         while True:
             data = conn.recv(1024)
-            print(data)
-            if (data[0:6]).decode('utf-8') == 'IDDEST':
-                print("pass")
-                dest = get_socket(data[6:])
-                print("pass")
-                return setconnect(dest)
+            data_dc_id = data[0:6].decode('utf-8')
+            data_dc = data[6:].decode('utf-8')
+            if data_dc_id == 'IDDEST':
+                addr = get_socket(data_dc)
+                if addr:
+                    return setconnect(addr)
 
     print(f"Handler start for {addr}")
     while True:
