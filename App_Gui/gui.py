@@ -7,6 +7,9 @@ from tkinter import Canvas, Entry, Button, PhotoImage
 from tracemalloc import start
 import threading
 import socket
+import customtkinter
+from customtkinter import CTkButton, CTkImage
+from PIL import Image, ImageTk
 
 OUTPUT_PATH = Path(__file__).parent
 ASSETS_PATH = OUTPUT_PATH / \
@@ -38,7 +41,7 @@ canvas.create_rectangle(
     0.0,
     179.0,
     520.0,
-    fill="#3C3C3C",
+    fill="#2B2D31",
     outline="")
 
 image_image_1 = PhotoImage(
@@ -104,11 +107,52 @@ button_2.place(
     height=24.0
 )
 
-conn = f.setconnect()
-Handler_recv = threading.Thread(
-    target=f.thread_chat_recv, args=(conn,))
-Handler_recv.start()
-# f.peer_conn(conn)
+# Chargement des images avec PIL
+# Remplacez par votre chemin absolu ou relatif
+light_mode_image = Image.open(
+    "App_new_gen/build/assets/frame0/plus-regular-204.png")
+# Remplacez par votre chemin absolu ou relatif
+dark_mode_image = Image.open(
+    "App_new_gen/build/assets/frame0/plus-regular-204.png")
+
+
+# Création de l'objet CTkImage
+ctk_image = CTkImage(
+    light_image=light_mode_image,
+    dark_image=dark_mode_image,
+    size=(20, 20)  # Taille de l'image pour le rendu indépendant du scaling
+)
+
+# conn = f.setconnect()
+# Handler_recv = threading.Thread(
+#     target=f.thread_chat_recv, args=(conn,))
+# Handler_recv.start()
+# # f.peer_conn(conn)
+
+
+def bouton_clique():
+    print("Bouton cliqué !")
+
+
+def create_rounded_button():
+    custom_button = customtkinter.CTkButton(
+        window,
+        text="",
+        command=bouton_clique,
+        width=168,
+        height=30,
+        corner_radius=5,  # Paramètre pour définir les coins arrondis
+        border_width=1,  # Pas de bordure
+        # Couleur au survol (claire, foncée)
+        hover_color=("#36373D"),
+        text_color=("black", "black"),  # Couleur du texte (claire, foncée)
+        font=("Arial", -12),  # Police (taille en pixels négative)
+        hover=True,  # Activer l'effet au survol
+        image=ctk_image,
+        bg_color="#3C3C3C",
+        fg_color="#3C3C3C"
+    )
+    custom_button.place(x=5, y=485)  # Position du bouton
 
 
 def show_msg_client(event=None):
@@ -141,9 +185,12 @@ def show_msg_ext(event=None):
             text_messages.config(state='disabled')
 
 
-Handler_show = threading.Thread(
-    target=show_msg_ext, args=())
-Handler_show.start()
+# Création du bouton avec des bords ronds
+create_rounded_button()
+
+#  Handler_show = threading.Thread(
+#     target=show_msg_ext, args=())
+# Handler_show.start()
 
 entry_1.bind("<Return>", show_msg_client)
 
