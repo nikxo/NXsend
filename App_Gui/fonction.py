@@ -6,7 +6,7 @@ from queue import Queue
 # Etablit la connection au serveur
 def setconnect():
     # Creation Socket de connection
-    addr = ('192.168.0.51', 4444)
+    addr = ('147.215.206.144', 4444)
     socket_ = socket.create_connection(addr)
     return socket_
 
