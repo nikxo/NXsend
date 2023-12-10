@@ -2,34 +2,36 @@ import customtkinter
 import tkinter as tk
 from tkinter import END
 from PIL import Image
-import re
 import threading
-import random
+import fonction as f
 import Sql_client as slc
-import sqlite3
+import random
+import socket
+# param
+id_to_widget = {}
+last_bt_id = None
+name_user = "User"
+ip_server = None
+port_server = None
+socket_ = None
+ip_dest = None
+
 light_mode_image_send = Image.open(
-    "App_Gui/frame0/send-solid-132.png")
-# Remplacez par votre chemin absolu ou relatif
+    "frame0/send-solid-132.png")
 dark_mode_image_send = Image.open(
-    "App_Gui/frame0/send-solid-132.png")
-
+    "frame0/send-solid-132.png")
 light_mode_image_file = Image.open(
-    "App_Gui/frame0/plus-regular-204.png")
-# Remplacez par votre chemin absolu ou relatif
+    "frame0/plus-regular-204.png")
 dark_mode_image_file = Image.open(
-    "App_Gui/frame0/plus-regular-204.png")
-
+    "frame0/plus-regular-204.png")
 light_mode_image_param = Image.open(
-    "App_Gui/frame0/parametres.png")
-# Remplacez par votre chemin absolu ou relatif
+    "frame0/parametres.png")
 dark_mode_image_param = Image.open(
-    "App_Gui/frame0/parametres.png")
-
+    "frame0/parametres.png")
 light_mode_image_add = Image.open(
-    "App_Gui/frame0/ajouter-un-utilisateur.png")
-# Remplacez par votre chemin absolu ou relatif
+    "frame0/ajouter-un-utilisateur.png")
 dark_mode_image_add = Image.open(
-    "App_Gui/frame0/ajouter-un-utilisateur.png")
+    "frame0/ajouter-un-utilisateur.png")
 
 # Création de l'objet CTkImage
 ctk_image_send = customtkinter.CTkImage(
@@ -37,19 +39,16 @@ ctk_image_send = customtkinter.CTkImage(
     dark_image=dark_mode_image_send,
     size=(25, 25)  # Taille de l'image pour le rendu indépendant du scaling
 )
-
 ctk_image_file = customtkinter.CTkImage(
     light_image=light_mode_image_file,
     dark_image=dark_mode_image_file,
     size=(25, 25)  # Taille de l'image pour le rendu indépendant du scaling
 )
-
 ctk_image_param = customtkinter.CTkImage(
     light_image=light_mode_image_param,
     dark_image=dark_mode_image_param,
     size=(20, 20)  # Taille de l'image pour le rendu indépendant du scaling
 )
-
 ctk_image_add = customtkinter.CTkImage(
     light_image=light_mode_image_add,
     dark_image=dark_mode_image_add,
@@ -61,36 +60,17 @@ app.configure(fg_color="#36373D")
 app.title("my app")
 app.geometry("852x511")
 app.minsize(852, 511)
+app.maxsize(852, 511)
 
 
-def verifier_ip(adresse):
-    # Modèle d'expression régulière pour vérifier une adresse IP
-    modele_ip = r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$'
-
-    # Vérification de correspondance avec l'expression régulière
-    correspondance = re.match(modele_ip, adresse)
-
-    if correspondance:
-        # Si l'adresse correspond au format IP
-        groupes = correspondance.groups()
-        # Vérification des parties de l'adresse IP
-        if all(0 <= int(groupe) <= 255 for groupe in groupes):
-            return True
-        else:
-            return False
-    else:
-        return False
-
-
-def windows():
-
+def windows_add():
     def sendBT():
         name = entry_name.get()
         ip = entry_ip.get()
         print(name, ip)
         if name and ip:
-            if verifier_ip(ip):
-                add(name)
+            if f.verifier_ip(ip):
+                add(name, ip)
                 toplevel.destroy()
             else:
                 print("fdp une ip")
@@ -107,6 +87,7 @@ def windows():
     toplevel.grid_rowconfigure(0, weight=0)
     toplevel.grid_rowconfigure(1, weight=0)
     toplevel.grid_rowconfigure(2, weight=0)
+    f.center_window(toplevel, app)
 
     label = customtkinter.CTkLabel(
         toplevel, text="Contact", font=("Helvetica Neue", 20, "bold"), justify="center")
@@ -133,6 +114,96 @@ def windows():
     Boutton.grid(column=0, row=3, pady=(30, 0))
 
 
+def windows_settings():
+    def sendBT():
+        global name_user
+        global socket_
+        name_user = entry_name.get()
+        server_ip = entry_ip.get()
+        server_port = entry_port.get()
+        socket_ = socket.create_connection((server_ip, server_port))
+        toplevel.destroy()
+
+    toplevel = customtkinter.CTkToplevel(app)
+    toplevel.configure(fg_color="#2f3030")
+    toplevel.geometry("200x300")
+    toplevel.maxsize(200, 250)
+    toplevel.minsize(200, 250)
+    toplevel.after(10, toplevel.lift)
+    toplevel.focus_force()
+    toplevel.grab_set()
+    toplevel.grid_columnconfigure(0, weight=1)
+    toplevel.grid_rowconfigure(0, weight=0)
+    toplevel.grid_rowconfigure(1, weight=0)
+    toplevel.grid_rowconfigure(2, weight=0)
+    toplevel.grid_rowconfigure(3, weight=0)
+    toplevel.grid_rowconfigure(4, weight=0)
+    f.center_window(toplevel, app)
+
+    label = customtkinter.CTkLabel(
+        toplevel, text="Settings", font=("Helvetica Neue", 20, "bold"), justify="center")
+    label.grid(column=0, row=0, pady=15)
+
+    # Calcul des coordonnées pour placer le cadre au milieu de la fenêtre
+    frame_name = customtkinter.CTkFrame(
+        toplevel, fg_color="#242424", height=35)
+    frame_name.grid(column=0, row=1, padx=15, pady=(0, 15))
+
+    entry_name = customtkinter.CTkEntry(
+        frame_name, corner_radius=0, border_width=0, fg_color="#242424", justify="center", placeholder_text="Ajouter un nom", font=("Helvetica Neue", 12))
+    entry_name.grid(padx=10, pady=2)
+
+    frame_ip = customtkinter.CTkFrame(toplevel, fg_color="#242424", height=35)
+    frame_ip.grid(column=0, row=2, padx=15, pady=(0, 15))
+
+    entry_ip = customtkinter.CTkEntry(
+        frame_ip, corner_radius=0, border_width=0, fg_color="#242424", justify="center", placeholder_text="Server ip")
+    entry_ip.grid(padx=10, pady=2)
+
+    frame_port = customtkinter.CTkFrame(
+        toplevel, fg_color="#242424", height=35)
+    frame_port.grid(column=0, row=3, padx=15, pady=(0, 15))
+
+    entry_port = customtkinter.CTkEntry(
+        frame_port, corner_radius=0, border_width=0, fg_color="#242424", justify="center", placeholder_text="Server port")
+    entry_port.grid(padx=10, pady=2)
+
+    Boutton = customtkinter.CTkButton(
+        toplevel, fg_color="black", text="Apply", command=sendBT)
+    Boutton.grid(column=0, row=4)
+
+
+def on_button_click(button_id, ip):
+    global last_bt_id
+    print("Bouton appuyé!")
+    print("ID du bouton:", button_id)
+    last_bt_id = button_id
+    sync = f"IDDEST{ip}"
+    socket_.send(sync.encode())
+    text_box.configure(state='normal')
+    text_box.delete(1.0, END)
+    slc.show_db_msg(text_box, button_id)
+    text_box.configure(state='disabled')
+    print(last_bt_id)
+
+
+def add(name, ip):
+    name_var = tk.StringVar()
+    name_var.set(name)
+    boutton_contact = customtkinter.CTkButton(
+        frame_scrollBox, width=170, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Helvetica Neue", 12, "bold"))
+    boutton_contact.grid(column=0, padx=2, pady=2, sticky="ew")
+
+    # Génération de l'identifiant du bouton
+    boutton_id = str(name) + str(random.randint(1, 1000))
+    id_to_widget[boutton_contact] = boutton_id
+
+    # Utilisation d'une fonction lambda pour passer l'ID au clic du bouton
+    boutton_contact.bind("<Button-1>", lambda event,
+                         id=boutton_id: on_button_click(id, ip))
+    slc.create_db(boutton_id)
+
+
 # Permet à la colonne principale de s'étendre
 app.grid_columnconfigure(0, weight=0)
 app.grid_columnconfigure(1, weight=400)
@@ -153,97 +224,6 @@ frame_scrollBox = customtkinter.CTkScrollableFrame(
     frame_menu, width=172, corner_radius=0)
 frame_scrollBox.grid(column=0, row=0, sticky="nsw")
 
-# Dictionnaire pour mapper des IDs à des widgets
-id_to_widget = {}
-last_bt_id = ""
-
-
-def on_button_click(button_id):
-    global last_bt_id
-    print("Bouton appuyé!")
-    print("ID du bouton:", button_id)
-    last_bt_id = button_id
-    text_box.configure(state='normal')
-    text_box.delete(1.0, END)
-    show_db_msg(button_id)
-    text_box.configure(state='disabled')
-
-
-def add(name):
-    name_var = tk.StringVar()
-    name_var.set(name)
-    boutton_contact = customtkinter.CTkButton(
-        frame_scrollBox, width=170, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Helvetica Neue", 12, "bold"))
-    boutton_contact.grid(column=0, padx=2, pady=2, sticky="ew")
-
-    # Génération de l'identifiant du bouton
-    boutton_id = str(name) + str(random.randint(1, 1000))
-    id_to_widget[boutton_contact] = boutton_id
-
-    # Utilisation d'une fonction lambda pour passer l'ID au clic du bouton
-    boutton_contact.bind("<Button-1>", lambda event,
-                         id=boutton_id: on_button_click(id))
-    slc.create_db(boutton_id)
-
-
-def show_db_msg(table_id):
-    # stoque les asockets en ligne
-    connexion = sqlite3.connect(f"App_Gui/Base/{table_id}.db")
-    # Créer un curseur
-    curseur = connexion.cursor()
-
-    curseur.execute("SELECT name, message FROM msg")
-    rows = curseur.fetchall()
-    text_box.configure(state='normal')
-    # Affiche les données de chaque ligne
-    for row in rows:
-        name, message = row  # Accéder individuellement aux colonnes 'name' et 'message'
-
-        # Insère le nom avec le tag 'red'
-        text_box.insert(END, name, 'red')
-        text_box.insert(END, f"{message}\n")  # Ajoute le message
-        # Configure le tag 'red' en rouge
-        text_box.tag_config('red', foreground='red')
-        text_box.yview_moveto(1)
-
-    text_box.configure(state='disabled')
-
-
-def show_msg_client(table_id, event=None):
-    nom = "User: "
-    message = entry.get()
-    if message:
-        print("bf")
-        slc.add_db_msg(table_id, nom, message)
-        # conn.send(message.encode())
-        print("send")
-        text_box.configure(state='normal')
-        # Insère le nom avec le tag 'red'
-        text_box.insert(END, nom, 'red')
-        text_box.insert(END, f"{message}\n")  # Ajoute le message
-        # Configure le tag 'red' en rouge
-        text_box.tag_config('red', foreground='red')
-        text_box.yview_moveto(1)  # Fait défiler vers le bas
-        text_box.configure(state='disabled')
-        entry.delete(0, END)  # Efface le texte dans l'entrée après l'envoi
-
-
-def show_msg_ext(event=None):
-    while True:
-        nom = "Server: "
-        received_data = f.thread_chat_recv(conn)
-        if received_data:
-            text_box.configure(state='normal')
-            text_box.insert(END, nom, 'blue')
-            text_box.insert(END, f"{received_data}\n")
-            text_box.tag_config('blue', foreground='blue')
-            text_box.yview_moveto(1)
-            text_box.configure(state='disabled')
-
-#  Handler_show = threading.Thread(
-#     target=show_msg_ext, args=())
-# Handler_show.start()
-
 
 frame_boutton = customtkinter.CTkFrame(
     frame_menu, corner_radius=0, height=40, fg_color="#242424")
@@ -253,11 +233,11 @@ frame_boutton.grid_columnconfigure(0, weight=0)
 frame_boutton.grid_columnconfigure(1, weight=0)
 
 boutton_add = customtkinter.CTkButton(
-    frame_boutton, width=90, height=40, image=ctk_image_add, text="", fg_color="#242424", hover_color="#2e2e2e", command=windows)
+    frame_boutton, width=90, height=40, image=ctk_image_add, text="", fg_color="#242424", hover_color="#2e2e2e", command=windows_add)
 boutton_add.grid(column=0, padx=2, pady=2)
 
 boutton_options = customtkinter.CTkButton(
-    frame_boutton, width=90, height=40, image=ctk_image_param, text="", fg_color="#242424", hover_color="#2e2e2e")
+    frame_boutton, width=90, height=40, image=ctk_image_param, text="", fg_color="#242424", hover_color="#2e2e2e", command=windows_settings)
 boutton_options.grid(column=1, row=0, padx=2, pady=2)
 
 frame_main_right = customtkinter.CTkFrame(
@@ -298,9 +278,15 @@ file_button = customtkinter.CTkButton(
 file_button.grid(column=0, row=0)
 
 send_button = customtkinter.CTkButton(
-    frame_entry, corner_radius=5, width=0, image=ctk_image_send, text="", fg_color="#242424", hover=False, command=lambda: show_msg_client(last_bt_id))
+    frame_entry, corner_radius=5, width=0, image=ctk_image_send, text="", fg_color="#242424", hover=False, command=lambda: f.show_msg_client(entry, text_box, last_bt_id, name_user, socket_))
 send_button.grid(column=2, row=0)
 
-entry.bind("<Return>", lambda event: show_msg_client(last_bt_id))
+entry.bind("<Return>", lambda event: f.show_msg_client(
+    entry, text_box, last_bt_id, name_user, socket_))
+
+
+Handler_show = threading.Thread(
+    target=f.show_msg_ext, args=(text_box, socket_))
+Handler_show.start()
 
 app.mainloop()

@@ -4,8 +4,9 @@ from queue import Queue
 import tkinter as tk
 from tkinter import END
 from PIL import Image
-
-
+import Sql_client as slc
+import re
+import random
 # Etablit la connection au serveur
 
 
@@ -103,3 +104,64 @@ def ctk_image_add_():
         size=(20, 20)  # Taille de l'image pour le rendu indépendant du scaling
     )
     return ctk_image_add_
+
+
+def verifier_ip(adresse):
+    # Modèle d'expression régulière pour vérifier une adresse IP
+    modele_ip = r'^(\d{1,3})\.(\d{1,3})\.(\d{1,3})\.(\d{1,3})$'
+
+    # Vérification de correspondance avec l'expression régulière
+    correspondance = re.match(modele_ip, adresse)
+
+    if correspondance:
+        # Si l'adresse correspond au format IP
+        groupes = correspondance.groups()
+        # Vérification des parties de l'adresse IP
+        if all(0 <= int(groupe) <= 255 for groupe in groupes):
+            return True
+        else:
+            return False
+    else:
+        return False
+
+
+def show_msg_ext(text_box, conn, event=None):
+    while True:
+        nom = "Server: "
+        received_data = thread_chat_recv(conn)
+        if received_data:
+            text_box.configure(state='normal')
+            text_box.insert(END, nom, 'blue')
+            text_box.insert(END, f"{received_data}\n")
+            text_box.tag_config('blue', foreground='blue')
+            text_box.yview_moveto(1)
+            text_box.configure(state='disabled')
+
+
+def show_msg_client(entry, text_box, table_id, name_user, conn, event=None):
+    nom = f"{name_user}: "
+    message = entry.get()
+    if message:
+        slc.add_db_msg(table_id, nom, message)
+        conn.send(message.encode())
+        print("send")
+        text_box.configure(state='normal')
+        # Insère le nom avec le tag 'red'
+        text_box.insert(END, nom, 'red')
+        text_box.insert(END, f"{message}\n")  # Ajoute le message
+        # Configure le tag 'red' en rouge
+        text_box.tag_config('red', foreground='red')
+        text_box.yview_moveto(1)  # Fait défiler vers le bas
+        text_box.configure(state='disabled')
+        entry.delete(0, END)  # Efface le texte dans l'entrée après l'envoi
+
+
+def center_window(window, parent):
+    window.update_idletasks()
+    width = window.winfo_width()
+    height = window.winfo_height()
+    parent_width = parent.winfo_width()
+    parent_height = parent.winfo_height()
+    x = (parent_width // 2) - (width // 2) + parent.winfo_x()
+    y = (parent_height // 2) - (height // 2) + parent.winfo_y()
+    window.geometry('{}x{}+{}+{}'.format(width, height, x, y))
