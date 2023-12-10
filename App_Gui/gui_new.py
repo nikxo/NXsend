@@ -5,7 +5,8 @@ from PIL import Image
 import re
 import threading
 import random
-
+import Sql_client as slc
+import sqlite3
 light_mode_image_send = Image.open(
     "App_Gui/frame0/send-solid-132.png")
 # Remplacez par votre chemin absolu ou relatif
@@ -91,7 +92,8 @@ def windows():
             if verifier_ip(ip):
                 add(name)
                 toplevel.destroy()
-            print("fdp une ip")
+            else:
+                print("fdp une ip")
 
     toplevel = customtkinter.CTkToplevel(app)
     toplevel.configure(fg_color="#2f3030")
@@ -151,11 +153,68 @@ frame_scrollBox = customtkinter.CTkScrollableFrame(
     frame_menu, width=172, corner_radius=0)
 frame_scrollBox.grid(column=0, row=0, sticky="nsw")
 
+# Dictionnaire pour mapper des IDs à des widgets
+id_to_widget = {}
+last_bt_id = ""
 
-def show_msg_client(event=None):
-    nom = "Nico: "
+
+def on_button_click(button_id):
+    global last_bt_id
+    print("Bouton appuyé!")
+    print("ID du bouton:", button_id)
+    last_bt_id = button_id
+    text_box.configure(state='normal')
+    text_box.delete(1.0, END)
+    show_db_msg(button_id)
+    text_box.configure(state='disabled')
+
+
+def add(name):
+    name_var = tk.StringVar()
+    name_var.set(name)
+    boutton_contact = customtkinter.CTkButton(
+        frame_scrollBox, width=170, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Helvetica Neue", 12, "bold"))
+    boutton_contact.grid(column=0, padx=2, pady=2, sticky="ew")
+
+    # Génération de l'identifiant du bouton
+    boutton_id = str(name) + str(random.randint(1, 1000))
+    id_to_widget[boutton_contact] = boutton_id
+
+    # Utilisation d'une fonction lambda pour passer l'ID au clic du bouton
+    boutton_contact.bind("<Button-1>", lambda event,
+                         id=boutton_id: on_button_click(id))
+    slc.create_db(boutton_id)
+
+
+def show_db_msg(table_id):
+    # stoque les asockets en ligne
+    connexion = sqlite3.connect(f"App_Gui/Base/{table_id}.db")
+    # Créer un curseur
+    curseur = connexion.cursor()
+
+    curseur.execute("SELECT name, message FROM msg")
+    rows = curseur.fetchall()
+    text_box.configure(state='normal')
+    # Affiche les données de chaque ligne
+    for row in rows:
+        name, message = row  # Accéder individuellement aux colonnes 'name' et 'message'
+
+        # Insère le nom avec le tag 'red'
+        text_box.insert(END, name, 'red')
+        text_box.insert(END, f"{message}\n")  # Ajoute le message
+        # Configure le tag 'red' en rouge
+        text_box.tag_config('red', foreground='red')
+        text_box.yview_moveto(1)
+
+    text_box.configure(state='disabled')
+
+
+def show_msg_client(table_id, event=None):
+    nom = "User: "
     message = entry.get()
     if message:
+        print("bf")
+        slc.add_db_msg(table_id, nom, message)
         # conn.send(message.encode())
         print("send")
         text_box.configure(state='normal')
@@ -184,17 +243,6 @@ def show_msg_ext(event=None):
 #  Handler_show = threading.Thread(
 #     target=show_msg_ext, args=())
 # Handler_show.start()
-
-
-def add(name):
-    name_var = tk.StringVar()
-    name_var.set(name)
-    boutton_test = customtkinter.CTkButton(
-        frame_scrollBox, width=170, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Helvetica Neue", 12, "bold"), command=)
-    boutton_test.grid(column=0, padx=2, pady=2, sticky="ew")
-
-    # Définition de l'identifiant du bouton
-    boutton_id = str(name) + str(random.randint(1, 1000))
 
 
 frame_boutton = customtkinter.CTkFrame(
@@ -234,9 +282,9 @@ frame_talk.grid_columnconfigure(0, weight=1)
 
 frame_entry = customtkinter.CTkFrame(frame_talk, fg_color="#242424")
 frame_entry.grid(column=0, sticky="we", pady=10, padx=10)
-frame_entry.grid_columnconfigure(0, weight=1)
+frame_entry.grid_columnconfigure(0, weight=0)
 frame_entry.grid_columnconfigure(1, weight=30)
-frame_entry.grid_columnconfigure(2, weight=1)
+frame_entry.grid_columnconfigure(2, weight=0)
 frame_entry.grid_rowconfigure(0, weight=1)
 
 
@@ -246,13 +294,13 @@ entry.grid(column=1)
 entry.grid(pady=5, sticky="ew")
 
 file_button = customtkinter.CTkButton(
-    frame_entry, corner_radius=5, width=0, image=ctk_image_file, text="", fg_color="#242424", hover=False, command=send)
+    frame_entry, corner_radius=5, width=0, image=ctk_image_file, text="", fg_color="#242424", hover=False)
 file_button.grid(column=0, row=0)
 
 send_button = customtkinter.CTkButton(
-    frame_entry, corner_radius=5, width=0, image=ctk_image_send, text="", fg_color="#242424", hover=False, command=show_msg_client)
+    frame_entry, corner_radius=5, width=0, image=ctk_image_send, text="", fg_color="#242424", hover=False, command=lambda: show_msg_client(last_bt_id))
 send_button.grid(column=2, row=0)
 
-entry.bind("<Return>", show_msg_client)
+entry.bind("<Return>", lambda event: show_msg_client(last_bt_id))
 
 app.mainloop()
