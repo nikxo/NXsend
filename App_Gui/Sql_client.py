@@ -5,7 +5,7 @@ import fonction as f
 
 def add_db_msg(table_id, name, msg):
     # stoque les asockets en ligne
-    connexion = sqlite3.connect(f"App_Gui/Base/{table_id}.db")
+    connexion = sqlite3.connect(f"Base/{table_id}.db")
 
     # Créer un curseur
     curseur = connexion.cursor()
@@ -21,7 +21,7 @@ def add_db_msg(table_id, name, msg):
 
 def create_db(name):
     # stoque les asockets en ligne
-    connexion = sqlite3.connect(f"App_Gui/Base/{name}.db")
+    connexion = sqlite3.connect(f"Base/{name}.db")
     # Créer un curseur
     curseur = connexion.cursor()
 
@@ -36,7 +36,7 @@ def create_db(name):
 
 def show_db_msg(text_box, table_id):
     # stoque les asockets en ligne
-    connexion = sqlite3.connect(f"App_Gui/Base/{table_id}.db")
+    connexion = sqlite3.connect(f"Base/{table_id}.db")
     # Créer un curseur
     curseur = connexion.cursor()
 
