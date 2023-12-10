@@ -138,7 +138,7 @@ def windows_settings():
         server_port = entry_port.get()
         socket_ = socket.create_connection((server_ip, server_port))
         Handler_show = threading.Thread(
-            target=f.show_msg_ext, args=(text_box, socket_))
+            target=show_msg_ext, args=(text_box, socket_))
         Handler_show.start()
         toplevel.destroy()
 
@@ -191,18 +191,24 @@ def windows_settings():
     Boutton.grid(column=0, row=4)
 
 
+sync_resquest_old = None
+
+
 def on_button_click(button_id, ip):
     global last_bt_id
+    global sync_resquest_old
     print("Bouton appuyé!")
     print("ID du bouton:", button_id)
     last_bt_id = button_id
     sync = f"IDDEST{ip}"
-    socket_.send(sync.encode())
-    text_box.configure(state='normal')
-    text_box.delete(1.0, END)
-    slc.show_db_msg(text_box, button_id)
-    text_box.configure(state='disabled')
-    print(last_bt_id)
+    if sync != sync_resquest_old:
+        sync_resquest_old = sync
+        socket_.send(sync.encode())
+        text_box.configure(state='normal')
+        text_box.delete(1.0, END)
+        slc.show_db_msg(text_box, button_id)
+        text_box.configure(state='disabled')
+        print(last_bt_id)
 
 
 def add(name, ip):

@@ -38,8 +38,7 @@ def thread_chat(conn, addr):
             return str(ip), int(port_value)
         return "nope"
 
-    def peer_conn(conn, data):
-        data_dc = data[6:].decode('utf-8')
+    def peer_conn(data_dc):
         addr = get_socket(data_dc)
         if addr_is_online(addr[0]):
             return get_socket_storage(addr[0])
@@ -52,14 +51,17 @@ def thread_chat(conn, addr):
         if not data:
             break
         data_dc_id = data[0:6].decode('utf-8')
+        data_dc = data[6:].decode('utf-8')
         if data_dc_id == 'IDDEST':
-            dest = peer_conn(conn, data)
+            dest = peer_conn(data_dc)
         if not dest:
             print("no socket found")
             break
         print(f"Données reçues: {data.decode('utf-8')}")
-        dest.send(data)
+        if data.decode('utf-8') != data_dc:
+            dest.send(data)
     conn.close()
+
     print(f"Handler for {addr} finish")
 
 
