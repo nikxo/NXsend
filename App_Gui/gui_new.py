@@ -122,6 +122,9 @@ def windows_settings():
         server_ip = entry_ip.get()
         server_port = entry_port.get()
         socket_ = socket.create_connection((server_ip, server_port))
+        Handler_show = threading.Thread(
+            target=f.show_msg_ext, args=(text_box, socket_))
+        Handler_show.start()
         toplevel.destroy()
 
     toplevel = customtkinter.CTkToplevel(app)
@@ -284,9 +287,5 @@ send_button.grid(column=2, row=0)
 entry.bind("<Return>", lambda event: f.show_msg_client(
     entry, text_box, last_bt_id, name_user, socket_))
 
-
-Handler_show = threading.Thread(
-    target=f.show_msg_ext, args=(text_box, socket_))
-Handler_show.start()
 
 app.mainloop()
