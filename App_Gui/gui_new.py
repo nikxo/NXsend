@@ -16,6 +16,11 @@ port_server = None
 socket_ = None
 ip_dest = None
 
+
+def get_id():
+    return last_bt_id
+
+
 light_mode_image_send = Image.open(
     "frame0/send-solid-132.png")
 dark_mode_image_send = Image.open(

@@ -6,7 +6,7 @@ from tkinter import END
 from PIL import Image
 import Sql_client as slc
 import re
-import random
+import gui_new
 # Etablit la connection au serveur
 
 
@@ -130,6 +130,7 @@ def show_msg_ext(text_box, conn, event=None):
         nom = "Server: "
         received_data = thread_chat_recv(conn)
         if received_data:
+            slc.add_db_msg(gui_new.get_id, nom, received_data)
             text_box.configure(state='normal')
             text_box.insert(END, nom, 'blue')
             text_box.insert(END, f"{received_data}\n")

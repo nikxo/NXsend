@@ -40,11 +40,10 @@ def thread_chat(conn, addr):
 
     def peer_conn(conn, data):
         data_dc = data[6:].decode('utf-8')
-        if data_dc_id == 'IDDEST':
-            addr = get_socket(data_dc)
-            if addr_is_online(addr[0]):
-                return get_socket_storage(addr[0])
-            print("offline")
+        addr = get_socket(data_dc)
+        if addr_is_online(addr[0]):
+            return get_socket_storage(addr[0])
+        print("offline")
 
     print(f"Handler start for {addr}")
     dest = None
