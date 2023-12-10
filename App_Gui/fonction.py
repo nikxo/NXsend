@@ -6,7 +6,6 @@ from tkinter import END
 from PIL import Image
 import Sql_client as slc
 import re
-import gui_new
 # Etablit la connection au serveur
 
 
@@ -123,20 +122,6 @@ def verifier_ip(adresse):
             return False
     else:
         return False
-
-
-def show_msg_ext(text_box, conn, event=None):
-    while True:
-        nom = "Server: "
-        received_data = thread_chat_recv(conn)
-        if received_data:
-            slc.add_db_msg(gui_new.get_id, nom, received_data)
-            text_box.configure(state='normal')
-            text_box.insert(END, nom, 'blue')
-            text_box.insert(END, f"{received_data}\n")
-            text_box.tag_config('blue', foreground='blue')
-            text_box.yview_moveto(1)
-            text_box.configure(state='disabled')
 
 
 def show_msg_client(entry, text_box, table_id, name_user, conn, event=None):

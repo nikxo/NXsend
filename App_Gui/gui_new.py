@@ -17,10 +17,6 @@ socket_ = None
 ip_dest = None
 
 
-def get_id():
-    return last_bt_id
-
-
 light_mode_image_send = Image.open(
     "frame0/send-solid-132.png")
 dark_mode_image_send = Image.open(
@@ -117,6 +113,20 @@ def windows_add():
     Boutton = customtkinter.CTkButton(
         toplevel, fg_color="black", text="Add", image=ctk_image_add, command=sendBT)
     Boutton.grid(column=0, row=3, pady=(30, 0))
+
+
+def show_msg_ext(text_box, conn, event=None):
+    while True:
+        nom = "Server: "
+        received_data = f.thread_chat_recv(conn)
+        if received_data:
+            slc.add_db_msg(last_bt_id, nom, received_data)
+            text_box.configure(state='normal')
+            text_box.insert(END, nom, 'blue')
+            text_box.insert(END, f"{received_data}\n")
+            text_box.tag_config('blue', foreground='blue')
+            text_box.yview_moveto(1)
+            text_box.configure(state='disabled')
 
 
 def windows_settings():
