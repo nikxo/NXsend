@@ -57,13 +57,14 @@ ctk_image_add = customtkinter.CTkImage(
 )
 
 app = customtkinter.CTk()
-app.configure(fg_color="#36373D")
+app.configure(fg_color="#2f3030")
 app.title("my app")
 app.geometry("852x511")
 app.minsize(852, 511)
 app.maxsize(852, 511)
 
 
+# Contact window
 def windows_add():
     def sendBT():
         name = entry_name.get()
@@ -129,6 +130,7 @@ def show_msg_ext(text_box, conn, event=None):
             text_box.configure(state='disabled')
 
 
+# Param Windows
 def windows_settings():
     def sendBT():
         global name_user
@@ -199,6 +201,10 @@ def on_button_click(button_id, ip):
     global sync_resquest_old
     print("Bouton appuyé!")
     print("ID du bouton:", button_id)
+
+    if last_bt_id != button_id:
+        toggle_visibility()
+
     last_bt_id = button_id
     sync = f"IDDEST{ip}"
     if sync != sync_resquest_old:
@@ -209,6 +215,7 @@ def on_button_click(button_id, ip):
     slc.show_db_msg(text_box, button_id, name_user)
     text_box.configure(state='disabled')
     print(last_bt_id)
+    toggle_visibility()
 
 
 def add(name, ip):
@@ -268,12 +275,14 @@ frame_main_right = customtkinter.CTkFrame(
     app, fg_color="#2f3030", corner_radius=0)
 
 
-Right_container = customtkinter.CTkFrame(app)
+# Right_container = customtkinter.CTkFrame(app)
 frame_main_right.grid(column=1, row=0, sticky="nsew")
 frame_main_right.grid_columnconfigure(0, weight=1)
 frame_main_right.grid_rowconfigure(0, weight=100)
 frame_main_right.grid_rowconfigure(1, weight=1)
 
+Idel_Label = customtkinter.CTkLabel(frame_main_right)
+Idel_Label.grid(column=0, row=0)
 
 text_box = customtkinter.CTkTextbox(
     frame_main_right, fg_color="#2f3030", state='disabled', corner_radius=0)
@@ -307,6 +316,26 @@ send_button.grid(column=2, row=0)
 
 entry.bind("<Return>", lambda event: f.show_msg_client(
     entry, text_box, last_bt_id, name_user, socket_))
+
+# Créer une variable pour suivre l'état actuel de visibilité de l'entrée et du texte
+entry_visible = False
+frame_talk.grid_remove()
+text_box.grid_remove()
+# Définir une fonction pour basculer la visibilité de l'entrée et du texte
+
+
+def toggle_visibility():
+    global entry_visible
+    if entry_visible:
+        frame_talk.grid_remove()
+        text_box.grid_remove()
+        Idel_Label.grid(column=0, row=0)
+        entry_visible = False
+    else:
+        text_box.grid(row=0, sticky="nswe", padx=10)
+        frame_talk.grid(row=1, sticky="sew")
+        Idel_Label.grid_remove()
+        entry_visible = True
 
 
 app.mainloop()
