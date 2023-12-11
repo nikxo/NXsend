@@ -214,9 +214,10 @@ def on_button_click(button_id, ip):
 
     if last_bt_id is None:
         toggle_visibility()
+        last_bt_id = button_id
     if last_bt_id != button_id:
         toggle_visibility()
-    last_bt_id = button_id
+        last_bt_id = button_id
     sync = f"IDDEST{ip}"
     if sync != sync_resquest_old:
         sync_resquest_old = sync
@@ -233,7 +234,7 @@ def add(name, ip):
     name_var = tk.StringVar()
     name_var.set(name)
     boutton_contact = customtkinter.CTkButton(
-        frame_scrollBox, width=170, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Ubuntu", 12, "bold"))
+        frame_scrollBox, width=186, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Ubuntu", 12, "bold"))
     boutton_contact.grid(column=0, padx=2, pady=2, sticky="ew")
 
     # Génération de l'identifiant du bouton
@@ -263,7 +264,7 @@ frame_menu.grid_rowconfigure(0, weight=40)
 frame_menu.grid_rowconfigure(1, weight=0)
 
 frame_scrollBox = customtkinter.CTkScrollableFrame(
-    frame_menu, width=172, corner_radius=0)
+    frame_menu, width=187, corner_radius=0)
 frame_scrollBox.grid(column=0, row=0, sticky="nsw")
 
 
@@ -352,4 +353,3 @@ def toggle_visibility():
 
 
 app.mainloop()
-input()
