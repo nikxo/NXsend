@@ -18,60 +18,46 @@ try:
     socket_ = None
     ip_dest = None
 
-    light_mode_image_send = Image.open(
-        "frame0/send-solid-132.png")
     dark_mode_image_send = Image.open(
         "frame0/send-solid-132.png")
-    light_mode_image_file = Image.open(
-        "frame0/plus-regular-204.png")
     dark_mode_image_file = Image.open(
         "frame0/plus-regular-204.png")
-    light_mode_image_param = Image.open(
-        "frame0/parametres.png")
     dark_mode_image_param = Image.open(
         "frame0/parametres.png")
-    light_mode_image_add = Image.open(
-        "frame0/ajouter-un-utilisateur.png")
     dark_mode_image_add = Image.open(
         "frame0/ajouter-un-utilisateur.png")
-    light_mode_image_idle = Image.open(
-        "frame0/warning.png")
     dark_mode_image_idle = Image.open(
         "frame0/warning.png")
 
     # Création de l'objet CTkImage
     ctk_image_send = customtkinter.CTkImage(
-        light_image=light_mode_image_send,
         dark_image=dark_mode_image_send,
         size=(25, 25)  # Taille de l'image pour le rendu indépendant du scaling
     )
     ctk_image_file = customtkinter.CTkImage(
-        light_image=light_mode_image_file,
         dark_image=dark_mode_image_file,
         size=(25, 25)  # Taille de l'image pour le rendu indépendant du scaling
     )
     ctk_image_param = customtkinter.CTkImage(
-        light_image=light_mode_image_param,
         dark_image=dark_mode_image_param,
         size=(20, 20)  # Taille de l'image pour le rendu indépendant du scaling
     )
     ctk_image_add = customtkinter.CTkImage(
-        light_image=light_mode_image_add,
         dark_image=dark_mode_image_add,
         size=(20, 20)  # Taille de l'image pour le rendu indépendant du scaling
     )
     ctk_image_idle = customtkinter.CTkImage(
-        light_image=light_mode_image_idle,
         dark_image=dark_mode_image_idle,
         size=(80, 80)  # Taille de l'image pour le rendu indépendant du scaling
     )
 
     app = customtkinter.CTk()
     app.configure(fg_color="#2f3030")
-    app.title("my app")
+    app.title("NXsend")
     app.geometry("852x511")
     app.minsize(852, 511)
     app.maxsize(852, 511)
+    customtkinter.set_appearance_mode("dark")
 
     # Contact window
 
