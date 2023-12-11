@@ -1,0 +1,21 @@
+
+
+Politique de confidentialité : 
+
+Cette application ne collecte aucune donnée personnelle identifiable à l'exception des adresses IP à des fins de connectivité et de suivi des connexions. Aucune autre information personnelle n'est enregistrée, stockée ou transmise au développeur de l'application. Les adresses IP collectées sont utilisées uniquement pour faciliter la connectivité et ne sont pas associées à des informations personnelles."
+
+
+Responsabilité de l'utilisateur : 
+
+En utilisant cette application, l'utilisateur reconnaît et accepte qu'il est seul responsable de la configuration, de la gestion et de l'utilisation de son propre serveur ainsi que des données qu'il stocke ou gère à travers l'application. Le développeur de l'application ne peut être tenu responsable des actions, de la sécurité ou de l'utilisation des données effectuées par l'utilisateur."
+
+
+Instructions pour la gestion du serveur :
+
+Des instructions détaillées et des conseils sont fournis dans la documentation de l'application pour aider les utilisateurs à configurer et à gérer leur propre serveur. Ces instructions visent à aider l'utilisateur dans la mise en place et le fonctionnement du serveur et sont fournies à titre informatif uniquement. Le développeur de l'application n'a aucune responsabilité ou implication directe dans la gestion du serveur de l'utilisateur.
+
+
+Absence de garantie de sécurité des données :
+ 
+Aucune garantie expresse ou implicite n'est fournie quant à la sécurité, l'intégrité ou la disponibilité des données stockées ou gérées par l'utilisateur sur son propre serveur. Le développeur de l'application ne peut garantir la sécurité des données, étant donné qu'il n'a aucun contrôle sur leur stockage, leur accès ou leur gestion par l'utilisateur."
+Ces déclarations sont plus élaborées pour fournir une vue détaillée de la position de l'application vis-à-vis des données et des responsabilités de l'utilisateur. Encore une fois, il est recommandé de faire examiner ces déclarations par un professionnel du droit pour s'assurer de leur adéquation aux lois en vigueur et à ta situation spécifique.
