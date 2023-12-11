@@ -52,13 +52,16 @@ def thread_chat(conn, addr):
             break
         data_dc_id = data[0:6].decode('utf-8')
         data_dc = data[6:].decode('utf-8')
-        if data_dc_id == 'IDDEST':
+        id_check = data_dc_id == 'IDDEST'
+        if id_check:
             dest = peer_conn(data_dc)
+            print(f"Sync to {data_dc}")
         if not dest:
             print("no socket found")
             break
-        print(f"Données reçues: {data.decode('utf-8')}")
-        if data.decode('utf-8') != data_dc:
+        if not id_check:
+            print(f"Données reçues: {data.decode('utf-8')}")
+            print(f"destinataire: {dest}")
             dest.send(data)
     conn.close()
 

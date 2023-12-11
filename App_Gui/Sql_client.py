@@ -34,7 +34,7 @@ def create_db(name):
     connexion.close()
 
 
-def show_db_msg(text_box, table_id):
+def show_db_msg(text_box, table_id, name_user):
     # stoque les asockets en ligne
     connexion = sqlite3.connect(f"Base/{table_id}.db")
     # Créer un curseur
@@ -46,12 +46,15 @@ def show_db_msg(text_box, table_id):
     # Affiche les données de chaque ligne
     for row in rows:
         name, message = row  # Accéder individuellement aux colonnes 'name' et 'message'
-
-        # Insère le nom avec le tag 'red'
-        text_box.insert(END, name, 'red')
+        print(f"{name_user}: ")
+        if f"{name_user}: " == name:
+            text_box.insert(END, name, 'red')
+        else:
+            text_box.insert(END, name, 'blue')
         text_box.insert(END, f"{message}\n")  # Ajoute le message
         # Configure le tag 'red' en rouge
         text_box.tag_config('red', foreground='red')
+        text_box.tag_config('blue', foreground='blue')
         text_box.yview_moveto(1)
 
     text_box.configure(state='disabled')

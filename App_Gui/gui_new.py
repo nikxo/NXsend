@@ -204,11 +204,11 @@ def on_button_click(button_id, ip):
     if sync != sync_resquest_old:
         sync_resquest_old = sync
         socket_.send(sync.encode())
-        text_box.configure(state='normal')
-        text_box.delete(1.0, END)
-        slc.show_db_msg(text_box, button_id)
-        text_box.configure(state='disabled')
-        print(last_bt_id)
+    text_box.configure(state='normal')
+    text_box.delete(1.0, END)
+    slc.show_db_msg(text_box, button_id, name_user)
+    text_box.configure(state='disabled')
+    print(last_bt_id)
 
 
 def add(name, ip):
