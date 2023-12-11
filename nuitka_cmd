@@ -1,0 +1,1 @@
+nuitka --standalone --include-data-dir=Base=Base --include-data-dir=Frame0=Frame0 gui_new.pyw --enable-plugin=tk-inter --windows-disable-console
