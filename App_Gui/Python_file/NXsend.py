@@ -1,13 +1,13 @@
 import customtkinter
 import tkinter as tk
-from tkinter import END
-from PIL import Image
+from tkinter import END, filedialog
+from PIL import Image, ImageTk, ImageDraw
 import threading
 import fonction as f
 import Sql_client as slc
 import random
 import socket
-import sys
+import os
 import signal
 
 
@@ -25,6 +25,10 @@ dark_mode_image_add = Image.open(
     "frame0/ajouter-un-utilisateur.png")
 dark_mode_image_idle = Image.open(
     "frame0/warning.png")
+dark_mode_image_profile = Image.open(
+    "frame0/def.png")
+dark_mode_image_profile_param = Image.open(
+    "frame0/def.png")
 
 # Création de l'objet CTkImage
 ctk_image_send = customtkinter.CTkImage(
@@ -46,6 +50,14 @@ ctk_image_add = customtkinter.CTkImage(
 ctk_image_idle = customtkinter.CTkImage(
     dark_image=dark_mode_image_idle,
     size=(80, 80)  # Taille de l'image pour le rendu indépendant du scaling
+)
+ctk_image_profile = customtkinter.CTkImage(
+    dark_image=dark_mode_image_profile,
+    size=(30, 30)  # Taille de l'image pour le rendu indépendant du scaling
+)
+ctk_image_profile_param = customtkinter.CTkImage(
+    dark_image=dark_mode_image_profile_param,
+    size=(50, 50)  # Taille de l'image pour le rendu indépendant du scaling
 )
 
 
@@ -119,7 +131,20 @@ def show_msg_ext(text_box, conn, stop_event):
         print(e)
 
 
-# Param Windows
+def create_rounded_image(path, size):
+    # Load the image
+    image = Image.open(path)
+    image = image.resize(size, Image.Resampling.LANCZOS)
+
+    # Create a mask
+    mask = Image.new('L', size, 0)
+    mask_draw = ImageDraw.Draw(mask)
+    mask_draw.ellipse((0, 0) + size, fill=255)
+
+    # Apply the mask to the image
+    rounded_image = Image.new('RGBA', size)
+    rounded_image.paste(image, (0, 0), mask)
+    return rounded_image
 
 
 def windows_settings():
@@ -153,9 +178,9 @@ def windows_settings():
     toplevel.grid_rowconfigure(4, weight=0)
     f.center_window(toplevel, app)
 
-    label = customtkinter.CTkLabel(
-        toplevel, text="Settings", font=("Helvetica Neue", 20, "bold"), justify="center")
-    label.grid(column=0, row=0, pady=15)
+    # label = customtkinter.CTkLabel(
+    #     toplevel, text="Settings", font=("Helvetica Neue", 20, "bold"), justify="center")
+    # label.grid(column=0, row=0, pady=15)
 
     # Calcul des coordonnées pour placer le cadre au milieu de la fenêtre
     frame_name = customtkinter.CTkFrame(
@@ -185,6 +210,11 @@ def windows_settings():
     Boutton = customtkinter.CTkButton(
         toplevel, fg_color="black", text="Apply", command=sendBT)
     Boutton.grid(column=0, row=4)
+
+    # Round image button
+    profile_button = customtkinter.CTkButton(
+        toplevel, image=ctk_image_profile_param, command=sendBT, text="", fg_color="transparent", hover=False, width=40, height=40)  # Replace 'sendBT' with your intended command
+    profile_button.grid(column=0, row=0, pady=15)
 
 
 def on_button_click(button_id, ip):
@@ -220,8 +250,8 @@ def add(name, ip):
     name_var = tk.StringVar()
     name_var.set(name)
     boutton_contact = customtkinter.CTkButton(
-        frame_scrollBox, width=186, height=40, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Ubuntu", 12, "bold"))
-    boutton_contact.grid(column=0, padx=2, pady=2, sticky="ew")
+        frame_scrollBox, width=177, height=43, textvariable=name_var, fg_color="#242424", hover_color="#2e2e2e", font=("Ubuntu", 12, "bold"), image=ctk_image_profile, compound='left', anchor='w')
+    boutton_contact.grid(column=0, padx=5, pady=3, sticky="ew")
 
     # Génération de l'identifiant du bouton
     boutton_id = str(name) + str(random.randint(1, 1000))
