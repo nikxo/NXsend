@@ -194,12 +194,17 @@ def on_button_click(button_id, ip):
     print("Bouton appuyé!")
     print("ID du bouton:", button_id)
 
-    if last_bt_id is None:
-        toggle_visibility()
-        last_bt_id = button_id
+    # if last_bt_id is None:
+    #     toggle_visibility()
+    #     last_bt_id = button_id
+
+    if last_bt_id == button_id:
+        toggle_visibility(False)
+        last_bt_id = None
     if last_bt_id != button_id:
-        toggle_visibility()
+        toggle_visibility(True)
         last_bt_id = button_id
+
     sync = f"IDDEST{ip}"
     if sync != sync_resquest_old:
         sync_resquest_old = sync
@@ -209,7 +214,6 @@ def on_button_click(button_id, ip):
     slc.show_db_msg(text_box, button_id, name_user)
     text_box.configure(state='disabled')
     print(last_bt_id)
-    toggle_visibility()
 
 
 def add(name, ip):
@@ -229,25 +233,22 @@ def add(name, ip):
     slc.create_db(boutton_id)
 
 
-def toggle_visibility():
-    global entry_visible
-    if entry_visible:
-        frame_talk.grid_remove()
-        text_box.grid_remove()
-        Idel_Label.grid(column=0, row=0)
-        entry_visible = False
-    else:
+def toggle_visibility(visible):
+    if visible:
         text_box.grid(row=0, sticky="nswe", padx=10)
         frame_talk.grid(row=1, sticky="sew")
         Idel_Label.grid_remove()
-        entry_visible = True
+    else:
+        frame_talk.grid_remove()
+        text_box.grid_remove()
+        Idel_Label.grid(column=0, row=0)
 
 
 def stop_all_thread():
     app.destroy()
     for handler, event in Thread:
         event.set()  # Signaler au thread de s'arrêter
-        handler.join(timeout=10)  # Attendre que le thread se termine
+        handler.join(timeout=3)  # Attendre que le thread se termine
         socket_.close()
         print("Handlers Close")
 
@@ -351,7 +352,6 @@ try:
         entry, text_box, last_bt_id, name_user, socket_))
 
     # Créer une variable pour suivre l'état actuel de visibilité de l'entrée et du texte
-    entry_visible = False
     frame_talk.grid_remove()
     text_box.grid_remove()
     # Définir une fonction pour basculer la visibilité de l'entrée et du texte
