@@ -4,7 +4,7 @@ import fonction as f
 import Sql
 
 # Adresse serveur
-IP_Server = '192.168.0.51'
+IP_Server = '147.215.205.186'
 Port_Server = 4444
 addr_Server = (IP_Server, Port_Server)
 
