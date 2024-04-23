@@ -99,13 +99,16 @@ Skipping the server configuration or adding contacts out of sequence can lead to
 
 
 
-# License
+## Licence
+This project is distributed under the Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0). This license allows users to copy, distribute, and remix your work as long as they give you credit as the creator. However, it prohibits commercial use.
 
-Specify the license under which your project is distributed. If using a popular license (like MIT, Apache, or GPL), provide a brief summary and a link to the full text.
+### Main Features of the CC BY-NC 4.0 License
+- **Attribution (BY)**: Users should give credit to the original creator when using your work.
+- **Non-Commercial Use (NC)**: Users may not use the content for commercial purposes or to obtain financial advantage.
 
-```text
-This project is licensed under the MIT License - see the LICENSE file for details.
-```
+You can see [the full text of the CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) for more details.
+
+Please ensure that any use, distribution, or modification of this project complies with the terms of this license. For any questions regarding rights and restrictions, please see the link above or contact an intellectual property expert.
 
 # Authors
 
