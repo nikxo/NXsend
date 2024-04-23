@@ -95,7 +95,7 @@ With these steps, you should be ready to use the application. Happy chatting!
 1. **Configure the Server**: Make sure to set up the server first, including entering the IP address and port.
 2. **Add a Contact**: Once the server configuration is complete, you can add contacts in the client GUI.
 
-Skipping the server configuration or adding contacts out of sequence can lead to errors and disrupt functionality. In the case of a bad configuration order, restart the server as well as the client
+Skipping the server configuration or adding contacts out of sequence can lead to errors and disrupt functionality. In the case of a bad configuration order, restart the server as well as the client.
 
 
 
