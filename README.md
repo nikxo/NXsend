@@ -65,7 +65,7 @@ After launching the client, you will see an interface like this:
 
 1. Press the `Settings` button to open the settings window. It should look like this:
 
-   ![Settings Window Image]()
+   ![Settings Window Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/settings.png)
 
 2. Enter your username, the server's IP address, and the port you configured in `Serv.py` and `Database.py`.
 
@@ -76,13 +76,13 @@ To create a conversation, follow these steps:
 
 1. Click the `Add User` button to open the user addition window:
 
-   ![Add User Window Image]()
+   ![Add User Window Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/contact.png)
 
 2. Enter the desired username and the IP address of the person you want to communicate with.
 
 3. Once the user is added, you will see them on the right side of the screen. Click on the username to start a chat session.
 
-   ![Chat Session Image]()
+   ![Chat Session Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/user.png)
 
 With these steps, you should be ready to use the application. Happy chatting!
 
