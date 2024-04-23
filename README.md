@@ -6,7 +6,7 @@
 
 # Description
 
-# Installation (Windows/Linux)
+# Installation
 ```bash
 # Clone the repository
 git clone https://github.com/nikxo/NXsend.git
@@ -15,10 +15,10 @@ git clone https://github.com/nikxo/NXsend.git
 pip install -r requirements.txt
 ```
 
-## Run server (Windows/Linux)
+## Run server
 Go to ``` Server ``` , open the terminal and type ```python Serv.py```
 
-## Run client gui (Windows/Linux)
+## Run client gui
 Go to ``` App_Gui/Python_file ``` , open the terminal and type ```python NXsend.py```
 
 ## Purging sql tables
