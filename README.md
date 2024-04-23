@@ -55,34 +55,39 @@ If you want to purge the SQL tables to start from a clean database, here's what 
     python Database.py
     ```
 
-# Client configuration
-To configure the client for this project, you will need to follow a few essential steps. This section will guide you through the process of setting up the client through to creating a conversation.
+# Client Configuration
+To configure the client for this project, follow these steps to set up the client and start a conversation.
 
-## Adding a server
-After launching the client, you will see an interface like this :
+## Adding a Server
+After launching the client, you will see an interface like this:
 
-![Image de démonstration]()
+![Demo Image]()
 
-Press the ```settings``` button and you will see this window appear :
+1. Press the `Settings` button to open the settings window. It should look like this:
 
-![Image de démonstration]()
+   ![Settings Window Image]()
 
-Enter your username, the IP address and the port you configured in Serv.py and Database.py then Apply.
+2. Enter your username, the server's IP address, and the port you configured in `Serv.py` and `Database.py`.
 
-![Image de démonstration]()
+3. Click `Apply` to save the settings.
 
-## create a conversation
+   ![Apply Settings Image]()
 
-Now you will press the other add user button and you should get this window:
+## Creating a Conversation
+To create a conversation, follow these steps:
 
-![Image de démonstration]()
+1. Click the `Add User` button to open the user addition window:
 
-Enter the name you wish to assign as well as the IP of the person with whom you wish to communicate.
+   ![Add User Window Image]()
 
-The new user is now added on the right side of the screen, tap on it to start a chat session.
+2. Enter the desired username and the IP address of the person you want to communicate with.
 
-![Image de démonstration]()
-*You are now ready to use the application*
+3. Once the user is added, you will see them on the right side of the screen. Click on the username to start a chat session.
+
+   ![Chat Session Image]()
+
+With these steps, you should be ready to use the application. Happy chatting!
+
 
 # License
 
