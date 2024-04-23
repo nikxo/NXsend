@@ -71,8 +71,6 @@ After launching the client, you will see an interface like this:
 
 3. Click `Apply` to save the settings.
 
-   ![Apply Settings Image]()
-
 ## Creating a Conversation
 To create a conversation, follow these steps:
 
