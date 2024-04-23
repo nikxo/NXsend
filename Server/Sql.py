@@ -1,7 +1,7 @@
 import sqlite3
 
 # stoque les asockets en ligne
-connexion = sqlite3.connect('Server/Server.db')
+connexion = sqlite3.connect('Server.db')
 
 # Créer un curseur
 curseur = connexion.cursor()

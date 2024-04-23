@@ -1,15 +1,12 @@
-import threading
-import time
 from queue import Queue
 import socket
-import Sql
 import sqlite3
 
 
 def thread_chat(conn, addr):
 
     # stoque les asockets en ligne
-    connexion = sqlite3.connect('Server/Server.db')
+    connexion = sqlite3.connect('Server.db')
 
     # Créer un curseur
     curseur = connexion.cursor()
