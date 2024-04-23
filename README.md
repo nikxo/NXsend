@@ -14,14 +14,14 @@ git clone https://github.com/nikxo/NXsend.git
 # install requirements
 pip install -r requirements.txt
 ```
-
-## Run server
+## Usage
+# Run server
 Go to ``` Server ``` , open the terminal and type ```python Serv.py```
 
-## Run client gui
+# Run client gui
 Go to ``` App_Gui/Python_file ``` , open the terminal and type ```python NXsend.py```
 
-## Purging sql tables
+# Purging sql tables
 If you want to purge the SQL tables to start from a clean database you must :
 - **For server**
    - Go to ``` Server ```, open the terminal and type ```python Database_client.py```
