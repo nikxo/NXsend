@@ -16,17 +16,17 @@ pip install -r requirements.txt
 ```
 
 ## Run server (Windows/Linux)
-Go to ``` Server ``` , open cmd and type ```python Serv.py```
+Go to ``` Server ``` , open the terminal and type ```python Serv.py```
 
 ## Run client gui (Windows/Linux)
-Go to ``` App_Gui/Python_file ``` , open cmd and type ```python NXsend.py```
+Go to ``` App_Gui/Python_file ``` , open the terminal and type ```python NXsend.py```
 
 ## Purging sql tables
 If you want to purge the SQL tables to start from a clean database you must :
 - **For server**
-   - Go to ``` Server ```, open cmd and type ```python Database_client.py```
+   - Go to ``` Server ```, open the terminal and type ```python Database_client.py```
 - **For client**
-   - Go to ``` App_Gui/Python_file ```, open cmd and type ```python Database.py```
+   - Go to ``` App_Gui/Python_file ```, open the terminal and type ```python Database.py```
 
 
 
