@@ -25,7 +25,7 @@ To start the server, follow these steps:
   ```bash
   python Serv.py
   ```
-- you must first modify the IP and the port in `Serv.py` and `Database.py` so that it corresponds to the IP of the machine used as well as a free port (otherwise an error will occur).
+- You must first modify the IP and the port in `Serv.py` and `Database.py` so that it corresponds to the IP of the machine used as well as a free port (otherwise an error will occur).
 
 ## Starting the Client GUI
 To launch the graphical user interface for the client:
@@ -56,7 +56,7 @@ If you want to purge the SQL tables to start from a clean database, here's what 
     ```
 
 # Client configuration
-To configure the client for this project, you will need to follow a few essential steps. This section will guide you through the process of setting up the client through to creating a chat.
+To configure the client for this project, you will need to follow a few essential steps. This section will guide you through the process of setting up the client through to creating a conversation.
 
 ## Adding a server
 After launching the client, you will see an interface like this :
@@ -65,9 +65,18 @@ After launching the client, you will see an interface like this :
 Press the ```settings``` button and you will see this window appear :
 ![Image de démonstration]()
 
-## Streaming area
+Enter your username, the IP address and the port you configured in Serv.py and Database.py then Apply.
 
 ![Image de démonstration]()
+
+## create a conversation
+
+Now you will press the other add user button and you should get this window:
+
+Enter the name you wish to assign as well as the IP of the person with whom you wish to communicate.
+
+The new user is now added on the right side of the screen, tap on it to start a chat session.
+*You are now ready to use the application*
 
 # License
 
