@@ -14,7 +14,7 @@ Nxsend is a Python messaging application based on the TCP protocol. It aims to b
 
 ### Objective
 Nxsend's goal is to become a versatile and secure messaging tool that can be used by everyone. Thanks to its open source approach, it encourages innovation and collaboration between developers around the world.
-### current status
+### Current status
 > ⚠️⚠️ currently, the function allowing the management of private and public keys allowing the encryption of communications is not implemented. This version is a prototype for a more advanced version in C language. Please do not use it as a secure messaging service in the current state of affairs.
 # Installation
 ```bash
