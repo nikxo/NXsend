@@ -16,7 +16,7 @@ pip install -r requirements.txt
 ```
 
 ## Run server (Windows/Linux)
-Go to ''' Server ''' , open cmd and type '''python Serv.py'''\
+Go to ``` Server ``` , open cmd and type ```python Serv.py```\
 
 # Overview
 
