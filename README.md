@@ -29,7 +29,45 @@ If you want to purge the SQL tables to start from a clean database you must :
 - **For client**
    - Go to ``` App_Gui/Python_file ```, open the terminal and type ```python Database.py```
 
+# Usage
+Pour utiliser les fonctionnalités de base de ce projet, vous devrez exécuter certaines commandes essentielles. Voici un guide rapide pour vous aider à démarrer :
 
+## Lancement du Serveur
+Pour démarrer le serveur, suivez ces étapes :
+- Accédez au répertoire `Server`.
+- Ouvrez le terminal.
+- Tapez la commande suivante pour exécuter le serveur :
+  ```bash
+  python Serv.py
+  ```
+
+## Lancement de l'Interface Client GUI
+Pour lancer l'interface graphique du client :
+- Accédez au répertoire `App_Gui/Python_file`.
+- Ouvrez le terminal.
+- Tapez la commande suivante pour exécuter le client GUI :
+  ```bash
+  python NXsend.py
+  ```
+
+## Purge des Tables SQL
+Si vous souhaitez purger les tables SQL pour recommencer avec une base de données propre, voici ce que vous devez faire :
+
+- **Pour le Serveur** :
+  - Allez dans le répertoire `Server`.
+  - Ouvrez le terminal.
+  - Tapez la commande suivante pour exécuter le script qui purge la base de données du serveur :
+    ```bash
+    python Database_client.py
+    ```
+
+- **Pour le Client** :
+  - Allez dans `App_Gui/Python_file`.
+  - Ouvrez le terminal.
+  - Tapez la commande suivante pour purger la base de données du client :
+    ```bash
+    python Database.py
+    ```
 
 # Overview
 
