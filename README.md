@@ -5,7 +5,15 @@
 ![GitHub stars](https://img.shields.io/github/stars/nikxo/Xeha)
 
 # Description
+Nxsend is a Python messaging application based on the TCP protocol. It aims to be a fast and secure messaging service, accessible to everyone, while remaining open source. Designed to meet varied needs, Nxsend seeks to provide a smooth and reliable user experience.
 
+### Main Features
+- **Real-Time Communication**: Nxsend uses the TCP protocol to ensure fast and efficient communication between users.
+- **Security**: Data security is a priority. Nxsend implements robust security measures to protect user conversations.
+- **Open Source**: As an open source project, Nxsend encourages community participation. Source code is available for developers to contribute, modify and improve the application.
+
+### Objective
+Nxsend's goal is to become a versatile and secure messaging tool that can be used by everyone. Thanks to its open source approach, it encourages innovation and collaboration between developers around the world.
 # Installation
 ```bash
 # Clone the repository
