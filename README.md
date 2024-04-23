@@ -61,7 +61,7 @@ To configure the client for this project, follow these steps to set up the clien
 ## Adding a Server
 After launching the client, you will see an interface like this:
 
-![Demo Image]()
+![Demo Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/Demo.png)
 
 1. Press the `Settings` button to open the settings window. It should look like this:
 
