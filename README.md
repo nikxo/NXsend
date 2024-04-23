@@ -21,6 +21,15 @@ Go to ``` Server ``` , open cmd and type ```python Serv.py```
 ## Run client gui (Windows/Linux)
 Go to ``` App_Gui/Python_file ``` , open cmd and type ```python NXsend.py```
 
+## Purging sql tables
+If you want to purge the SQL tables to start from a clean database you must:
+# purging server tables ( ``` Server ```)
+```bash
+python Database_client.py
+```
+
+
+
 # Overview
 
 ## Token exchanger
