@@ -86,14 +86,17 @@ To create a conversation, follow these steps:
 
 With these steps, you should be ready to use the application. Happy chatting!
 
-⚠️ **Warning**: It's crucial to follow the configuration steps in the correct order. Start by configuring the server before adding a contact.
+# Important: Configuration Order
 
-Ensure you complete the server setup before proceeding with the client configuration. This will prevent errors and ensure a smooth operation.
+> ⚠️⚠️ **Critical Warning**: You must follow the configuration steps in the exact order. Begin by configuring the server, then proceed to add contacts.
 
-1. **Configure the Server**: Follow the instructions for setting up the server, including entering the IP address and port.
-2. **Add a Contact**: After the server is configured, proceed to add contacts as needed.
+**Do not skip or change the sequence** to avoid potential issues with communication and connectivity.
 
-Ignoring this order could lead to issues with communication and connectivity.
+1. **Configure the Server**: Make sure to set up the server first, including entering the IP address and port.
+2. **Add a Contact**: Once the server configuration is complete, you can add contacts in the client GUI.
+
+Skipping the server configuration or adding contacts out of sequence can lead to errors and disrupt functionality.
+
 
 
 # License
