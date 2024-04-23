@@ -9,14 +9,17 @@
 # Installation (Windows/Linux)
 ```bash
 # Clone the repository
-git clone (https://github.com/nikxo/NXsend.git)
+git clone https://github.com/nikxo/NXsend.git
 
 # install requirements
 pip install -r requirements.txt
 ```
 
 ## Run server (Windows/Linux)
-Go to ``` Server ``` , open cmd and type ```python Serv.py```\
+Go to ``` Server ``` , open cmd and type ```python Serv.py```
+
+## Run client gui (Windows/Linux)
+Go to ``` App_Gui/Python_file ``` , open cmd and type ```python NXsend.py```
 
 # Overview
 
