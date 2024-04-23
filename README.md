@@ -56,7 +56,7 @@ If you want to purge the SQL tables to start from a clean database, here's what 
   - Open a terminal.
   - Type the following command to run the script that purges the server's database:
     ```bash
-    python Database_client.py
+    python Database.py
     ```
 
 - **For the Client**:
@@ -64,7 +64,7 @@ If you want to purge the SQL tables to start from a clean database, here's what 
   - Open a terminal.
   - Type the following command to purge the client's database:
     ```bash
-    python Database.py
+    python Database_client.py
     ```
 
 # Client Configuration
