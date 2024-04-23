@@ -1,13 +1,25 @@
 ![Image de démonstration](https://raw.githubusercontent.com/nikxo/NXsend/main/File/NXsend_ban.jpg)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
-![Static Badge](https://img.shields.io/badge/Nginx-1.7.11.3-green:badgeContent)
-![Static Badge](https://img.shields.io/badge/Docker-17.06.0+-blue:badgeContent)
+[![Python-3.10.0](https://img.shields.io/badge/Python-3.10.0-green:badgeContent)](https://www.python.org/downloads/release/python-3100/)
+[![customtkinter-5.2.2](https://img.shields.io/badge/customtkinter-5.2.2-green:badgeContent)](https://github.com/TomSchimansky/CustomTkinter)
 ![GitHub stars](https://img.shields.io/github/stars/nikxo/Xeha)
 
 # Description
+Nxsend is a Python messaging application based on the TCP protocol. It aims to be a fast and secure messaging service, accessible to everyone, while remaining open source. Designed to meet varied needs, Nxsend seeks to provide a smooth and reliable user experience.
 
+### Main Features
+- **Real-Time Communication**: Nxsend uses the TCP protocol to ensure fast and efficient communication between users.
+- **Security**: Data security is a priority. Nxsend implements robust security measures to protect user conversations.
+- **Open Source**: As an open source project, Nxsend encourages community participation. Source code is available for developers to contribute, modify and improve the application.
+
+### Objective
+Nxsend's goal is to become a versatile and secure messaging tool that can be used by everyone. Thanks to its open source approach, it encourages innovation and collaboration between developers around the world.
+### Current status
+> ⚠️⚠️ currently, the function allowing the management of private and public keys allowing the encryption of communications is not implemented. This version is a prototype for a more advanced version in C language. Please do not use it as a secure messaging service in the current state of affairs.
 # Installation
 ```bash
+
+
 # Clone the repository
 git clone https://github.com/nikxo/NXsend.git
 
@@ -65,7 +77,7 @@ After launching the client, you will see an interface like this:
 
 1. Press the `Settings` button to open the settings window. It should look like this:
 
-   ![Settings Window Image]()
+   ![Settings Window Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/settings.png)
 
 2. Enter your username, the server's IP address, and the port you configured in `Serv.py` and `Database.py`.
 
@@ -76,13 +88,13 @@ To create a conversation, follow these steps:
 
 1. Click the `Add User` button to open the user addition window:
 
-   ![Add User Window Image]()
+   ![Add User Window Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/contact.png)
 
 2. Enter the desired username and the IP address of the person you want to communicate with.
 
 3. Once the user is added, you will see them on the right side of the screen. Click on the username to start a chat session.
 
-   ![Chat Session Image]()
+   ![Chat Session Image](https://raw.githubusercontent.com/nikxo/NXsend/main/File/user.png)
 
 With these steps, you should be ready to use the application. Happy chatting!
 
@@ -99,17 +111,13 @@ Skipping the server configuration or adding contacts out of sequence can lead to
 
 
 
-# License
+## Licence
+This project is distributed under the Creative Commons Attribution-NonCommercial 4.0 International license (CC BY-NC 4.0). This license allows users to copy, distribute, and remix your work as long as they give you credit as the creator. However, it prohibits commercial use.
 
-Specify the license under which your project is distributed. If using a popular license (like MIT, Apache, or GPL), provide a brief summary and a link to the full text.
+### Main Features of the CC BY-NC 4.0 License
+- **Attribution (BY)**: Users should give credit to the original creator when using your work.
+- **Non-Commercial Use (NC)**: Users may not use the content for commercial purposes or to obtain financial advantage.
 
-```text
-This project is licensed under the MIT License - see the LICENSE file for details.
-```
+You can see [the full text of the CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) for more details.
 
-# Authors
-
-List the project's authors and contributors. You can link to their GitHub profiles or personal websites.
-
-- [Nikxo](https://github.com/nikxo)
-- [Vegasword](https://github.com/vegasword)
+Please ensure that any use, distribution, or modification of this project complies with the terms of this license. For any questions regarding rights and restrictions, please see the link above or contact an intellectual property expert.
