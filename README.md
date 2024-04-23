@@ -109,10 +109,3 @@ This project is distributed under the Creative Commons Attribution-NonCommercial
 You can see [the full text of the CC BY-NC 4.0 license](https://creativecommons.org/licenses/by-nc/4.0/) for more details.
 
 Please ensure that any use, distribution, or modification of this project complies with the terms of this license. For any questions regarding rights and restrictions, please see the link above or contact an intellectual property expert.
-
-# Authors
-
-List the project's authors and contributors. You can link to their GitHub profiles or personal websites.
-
-- [Nikxo](https://github.com/nikxo)
-- [Vegasword](https://github.com/vegasword)
