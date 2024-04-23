@@ -1,7 +1,6 @@
 ![Image de démonstration](https://raw.githubusercontent.com/nikxo/NXsend/main/File/NXsend_ban.jpg)
 [![License: CC BY-NC 4.0](https://img.shields.io/badge/License-CC_BY--NC_4.0-lightgrey.svg)](https://creativecommons.org/licenses/by-nc/4.0/)
-![Static Badge](https://img.shields.io/badge/Nginx-1.7.11.3-green:badgeContent)
-![Static Badge](https://img.shields.io/badge/Docker-17.06.0+-blue:badgeContent)
+![Static Badge](https://img.shields.io/badge/Python-3.10.0-green:badgeContent)
 ![GitHub stars](https://img.shields.io/github/stars/nikxo/Xeha)
 
 # Description
