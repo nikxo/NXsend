@@ -60,9 +60,11 @@ To configure the client for this project, you will need to follow a few essentia
 
 ## Adding a server
 After launching the client, you will see an interface like this :
+
 ![Image de démonstration]()
 
 Press the ```settings``` button and you will see this window appear :
+
 ![Image de démonstration]()
 
 Enter your username, the IP address and the port you configured in Serv.py and Database.py then Apply.
@@ -73,9 +75,13 @@ Enter your username, the IP address and the port you configured in Serv.py and D
 
 Now you will press the other add user button and you should get this window:
 
+![Image de démonstration]()
+
 Enter the name you wish to assign as well as the IP of the person with whom you wish to communicate.
 
 The new user is now added on the right side of the screen, tap on it to start a chat session.
+
+![Image de démonstration]()
 *You are now ready to use the application*
 
 # License
