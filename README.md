@@ -86,7 +86,7 @@ To create a conversation, follow these steps:
 
 With these steps, you should be ready to use the application. Happy chatting!
 
-> ⚠️ **Warning**: It's crucial to follow the configuration steps in the correct order. Start by configuring the server before adding a contact.
+⚠️ **Warning**: It's crucial to follow the configuration steps in the correct order. Start by configuring the server before adding a contact.
 
 Ensure you complete the server setup before proceeding with the client configuration. This will prevent errors and ensure a smooth operation.
 
